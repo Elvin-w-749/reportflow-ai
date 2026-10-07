@@ -1,17 +1,18 @@
-# reportflow-ai · 分析报告工作台
+English | [Simplified Chinese](README.zh-CN.md)
+
+# reportflow-ai · Analysis Report Workbench
 
 An offline-first full-stack workspace that turns uploaded certificates and document
 packets into structured, evidence-backed analysis reports. Documents are OCR'd locally,
 analyzed by pluggable LLM providers, matched against a product library, and exported as
 shareable reports.
 
-一个「上传资料 → 识别 → 多模型分析 → 生成并导出报告」的本地优先全栈工作台，面向信贷 /
-征信类文档的结构化解析与报告生成场景。
-
 > ⚠️ **All business data in this repository is fictional.**
-> 本仓库内的全部业务数据（机构名称、产品名称、额度利率、测试账号、示例报告文本）均为**虚构示例**，
-> 仅用于技术演示与自动化测试，**不包含任何真实机构产品、真实客户数据或真实风控模型**。
-> 请勿将本项目输出用于任何实际授信、融资或信用决策。
+> Institution names, product names, limits and rates, test accounts and sample report
+> texts are all **fictional examples**, for technical demonstration and automated testing
+> only — **no real institution products, real customer data or real risk-control models**.
+> Do not use this project's output for any actual credit granting, financing or credit
+> decision.
 
 ---
 
@@ -32,20 +33,20 @@ shareable reports.
 
 ## What it does
 
-1. **Upload / 上传** — ID documents, credit reports and supplementary materials arrive as
+1. **Upload** — ID documents, credit reports and supplementary materials arrive as
    PDF, image or multipart upload. The browser keeps a local draft store so a refresh
    never loses in-progress work.
-2. **Parse / 识别** — Native-text PDF text is extracted directly; scanned pages go through
+2. **Parse** — Native-text PDF text is extracted directly; scanned pages go through
    a local OCR chain. Structured OCR output is validated against a frozen JSON Schema
    contract before it can be used as evidence.
-3. **Analyze / 多模型分析** — The parsed facts are sent to one or more LLM providers and
+3. **Analyze** — The parsed facts are sent to one or more LLM providers and
    normalized into a canonical evidence model. Every published number must be traceable
    to in-document evidence; when evidence is missing or conflicting the pipeline returns
    `review_required` instead of inventing a score.
-4. **Match / 匹配** — A deterministic scoring engine (`matchCore`) ranks entries from a
+4. **Match** — A deterministic scoring engine (`matchCore`) ranks entries from a
    local product library against the analyzed profile. The same engine runs in the
    browser (instant preview) and on the server (post-login result), so both agree.
-5. **Report / 报告与导出** — Results render into multi-section report pages and export to
+5. **Report** — Results render into multi-section report pages and export to
    PDF / image. Client, advisor, service and admin views are permission-scoped renderings
    of the same web app — there is no native or mini-program client.
 
