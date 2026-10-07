@@ -1,0 +1,54 @@
+# Dependencies and build output
+node_modules/
+dist/
+dist-ssr/
+.tmp/
+tmp/
+/public/
+
+# Release artifacts must be uploaded separately, never committed
+release-artifacts/
+release-work/
+audit/
+*.apk
+*.aab
+*.ipa
+
+# Secrets, reports, data and uploads
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.pdf
+*.jsonl
+*.private.txt
+*.private.log
+.npmrc
+!.npmrc.example
+private-samples/
+private-report-fixtures/
+data/
+uploads/
+logs/
+*.sqlite
+*.db
+*.private.json
+
+# Local tool caches
+.android-sdk*/
+.gradle*/
+.jdk/
+
+# OS/editor artifacts
+._*
+__MACOSX/
+.DS_Store
+Thumbs.db
+.vscode/
+.understand-anything/
+.project-context/generated/

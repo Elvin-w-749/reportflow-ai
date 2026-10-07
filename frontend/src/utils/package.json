@@ -1,0 +1,4 @@
+{
+  "type": "module",
+  "description": "ESM 工具模块 — 前后端共享（Node.js 通过动态 import() 或 require-ESM 桥接加载）"
+}

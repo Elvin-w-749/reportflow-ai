@@ -1,0 +1,497 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:reportflow:credit-analysis:phase0-contract-v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "contractId", "approvedDate", "productionBaseline", "implementationState",
+    "targetProviders", "authority", "sourceRouting", "terminalStatuses", "factStates",
+    "documentHardGate", "inactiveScoring", "executionBudgets", "httpStatusPolicy",
+    "normalizationLimits", "coordinateConversion", "blankPagePolicy", "semanticValidation", "errors",
+    "publicFailureProtocol", "cache", "secrets", "outboundData", "rollback"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 2 },
+    "contractId": { "const": "credit-analysis-phase0-v2" },
+    "approvedDate": { "type": "string", "const": "2026-08-17" },
+    "productionBaseline": { "$ref": "#/$defs/productionBaseline" },
+    "implementationState": { "$ref": "#/$defs/implementationState" },
+    "targetProviders": { "$ref": "#/$defs/targetProviders" },
+    "authority": { "$ref": "#/$defs/authority" },
+    "sourceRouting": { "$ref": "#/$defs/sourceRouting" },
+    "terminalStatuses": { "$ref": "#/$defs/terminalStatuses" },
+    "factStates": {
+      "type": "array", "minItems": 5, "maxItems": 5, "uniqueItems": true,
+      "items": { "enum": ["accepted", "unknown", "absent", "not_applicable", "conflict"] }
+    },
+    "documentHardGate": { "$ref": "#/$defs/documentHardGate" },
+    "inactiveScoring": { "$ref": "#/$defs/inactiveScoring" },
+    "executionBudgets": { "$ref": "#/$defs/executionBudgets" },
+    "httpStatusPolicy": { "$ref": "#/$defs/httpStatusPolicy" },
+    "normalizationLimits": { "$ref": "#/$defs/normalizationLimits" },
+    "coordinateConversion": { "$ref": "#/$defs/coordinateConversion" },
+    "blankPagePolicy": { "$ref": "#/$defs/blankPagePolicy" },
+    "semanticValidation": { "$ref": "#/$defs/semanticValidation" },
+    "errors": {
+      "type": "array", "minItems": 35, "maxItems": 35,
+      "items": { "$ref": "#/$defs/errorEntry" }
+    },
+    "publicFailureProtocol": { "$ref": "#/$defs/publicFailureProtocol" },
+    "cache": { "$ref": "#/$defs/cache" },
+    "secrets": { "$ref": "#/$defs/secrets" },
+    "outboundData": { "$ref": "#/$defs/outboundData" },
+    "rollback": { "$ref": "#/$defs/rollback" }
+  },
+  "$defs": {
+    "productionBaseline": {
+      "type": "object", "additionalProperties": false,
+      "required": ["gitCommit", "webRelease", "apiRelease"],
+      "properties": {
+        "gitCommit": { "const": "abcdef1234567890abcdef1234567890abcdef12" },
+        "webRelease": { "const": "20260817-125147-evidence-v7-abcdef1-web" },
+        "apiRelease": { "const": "20260817-125147-evidence-v7-abcdef1-api" }
+      }
+    },
+    "implementationState": {
+      "type": "object", "additionalProperties": false,
+      "required": ["phase", "contractOnly", "productionBehaviorChanged", "glmClientImplemented", "ocrAdapterImplemented", "reviewRequiredImplemented", "productionRouteChanged", "deployed"],
+      "properties": {
+        "phase": { "const": 0 }, "contractOnly": { "const": true },
+        "productionBehaviorChanged": { "const": false }, "glmClientImplemented": { "const": false },
+        "ocrAdapterImplemented": { "const": false }, "reviewRequiredImplemented": { "const": false },
+        "productionRouteChanged": { "const": false }, "deployed": { "const": false }
+      }
+    },
+    "provider": {
+      "type": "object",
+      "required": ["provider", "model", "endpoint", "role", "authoritative", "automaticFallbackProviders"],
+      "properties": {
+        "provider": { "type": "string" }, "model": { "type": "string" },
+        "endpoint": { "type": "string" }, "role": { "type": "string" },
+        "authoritative": { "const": false },
+        "automaticFallbackProviders": { "type": "array", "maxItems": 0 }
+      }
+    },
+    "ocrProvider": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/$defs/provider" },
+        {
+          "type": "object", "required": ["input"],
+          "properties": {
+            "provider": { "const": "zhipu-layout-parsing" }, "model": { "const": "glm-ocr" },
+            "endpoint": { "const": "https://open.bigmodel.cn/api/paas/v4/layout_parsing" },
+            "role": { "const": "scanned-page-layout-candidate-source" },
+            "input": { "const": "in-memory-data-uri" }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "factProvider": {
+      "type": "object",
+      "allOf": [
+        { "$ref": "#/$defs/provider" },
+        {
+          "type": "object",
+          "properties": {
+            "provider": { "const": "deepseek" }, "model": { "const": "deepseek-v4-flash" },
+            "endpoint": { "const": "https://api.deepseek.com/v1/chat/completions" },
+            "role": { "const": "candidate-fact-extraction" }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "targetProviders": {
+      "type": "object", "additionalProperties": false, "required": ["ocr", "factExtraction"],
+      "properties": { "ocr": { "$ref": "#/$defs/ocrProvider" }, "factExtraction": { "$ref": "#/$defs/factProvider" } }
+    },
+    "authority": {
+      "type": "object", "additionalProperties": false,
+      "required": ["factAcceptance", "derivedMetrics", "score", "modelSelfAttestationAllowed"],
+      "properties": {
+        "factAcceptance": { "const": "evidence-binder" }, "derivedMetrics": { "const": "deterministic-rules" },
+        "score": { "const": "deterministic-rules" }, "modelSelfAttestationAllowed": { "const": false }
+      }
+    },
+    "nativeRouting": {
+      "type": "object", "additionalProperties": false,
+      "required": ["reader", "glmCallCount", "factExtractionProvider", "legacyOcrFallbackAllowed"],
+      "properties": {
+        "reader": { "const": "mupdf" }, "glmCallCount": { "const": 0 },
+        "factExtractionProvider": { "const": "deepseek" }, "legacyOcrFallbackAllowed": { "const": false }
+      }
+    },
+    "scannedRouting": {
+      "type": "object", "additionalProperties": false,
+      "required": ["renderer", "ocrProvider", "ocrModel", "wholeDocumentSingleOcrProvider", "legacyOcrFallbackAllowed"],
+      "properties": {
+        "renderer": { "type": "array", "minItems": 2, "maxItems": 2, "uniqueItems": true, "items": { "enum": ["mupdf", "sharp"] } },
+        "ocrProvider": { "const": "zhipu-layout-parsing" }, "ocrModel": { "const": "glm-ocr" },
+        "wholeDocumentSingleOcrProvider": { "const": true }, "legacyOcrFallbackAllowed": { "const": false }
+      }
+    },
+    "sourceRouting": {
+      "type": "object", "additionalProperties": false,
+      "required": ["completeNativeTextPdf", "scannedPdfOrImage", "mixedNativeAndOcrWithinOneScannedDocument", "automaticFallbackProviders", "forbiddenProductionOcrFallbacks"],
+      "properties": {
+        "completeNativeTextPdf": { "$ref": "#/$defs/nativeRouting" },
+        "scannedPdfOrImage": { "$ref": "#/$defs/scannedRouting" },
+        "mixedNativeAndOcrWithinOneScannedDocument": { "const": false },
+        "automaticFallbackProviders": { "type": "array", "maxItems": 0 },
+        "forbiddenProductionOcrFallbacks": {
+          "type": "array", "minItems": 5, "maxItems": 5, "uniqueItems": true,
+          "items": { "enum": ["tesseract", "rapidocr", "moonshot", "kimi", "client-model"] }
+        }
+      }
+    },
+    "succeededStatus": {
+      "type": "object", "additionalProperties": false,
+      "required": ["documentHardGate", "executionCompletion", "evidenceArtifactIntegrity", "reviewArtifactIntegrity", "factAndDecisionDependencies", "authoritativeResult", "scoreRiskMatchAdviceAllowed", "cacheClass"],
+      "properties": {
+        "documentHardGate": { "const": "passed" }, "executionCompletion": { "const": "complete" },
+        "evidenceArtifactIntegrity": { "const": "complete" }, "reviewArtifactIntegrity": { "const": "not-applicable" },
+        "factAndDecisionDependencies": { "const": "closed" }, "authoritativeResult": { "const": true },
+        "scoreRiskMatchAdviceAllowed": { "const": true }, "cacheClass": { "const": "authoritative" }
+      }
+    },
+    "reviewStatus": {
+      "type": "object", "additionalProperties": false,
+      "required": ["documentHardGate", "executionCompletion", "evidenceArtifactIntegrity", "reviewArtifactIntegrity", "onlyFieldOrMetricUnresolved", "minimumAcceptedFactsRequired", "factAndDecisionDependencies", "authoritativeResult", "scoreRiskMatchAdviceAllowed", "cacheClass"],
+      "properties": {
+        "documentHardGate": { "const": "passed" }, "executionCompletion": { "const": "complete" },
+        "evidenceArtifactIntegrity": { "const": "complete" }, "reviewArtifactIntegrity": { "const": "complete" },
+        "onlyFieldOrMetricUnresolved": { "const": true }, "minimumAcceptedFactsRequired": { "const": false },
+        "factAndDecisionDependencies": { "const": "partially-open" }, "authoritativeResult": { "const": false },
+        "scoreRiskMatchAdviceAllowed": { "const": false }, "cacheClass": { "const": "review-only-v1" }
+      }
+    },
+    "failedStatus": {
+      "type": "object", "additionalProperties": false,
+      "required": ["documentHardGate", "executionCompletion", "reviewArtifactIntegrity", "failureCauses", "authoritativeResult", "analysisNumbersAllowed", "cacheClass"],
+      "properties": {
+        "documentHardGate": { "const": "failed-or-not-evaluable" },
+        "executionCompletion": { "const": "any" },
+        "reviewArtifactIntegrity": { "const": "incomplete-or-unavailable" },
+        "failureCauses": {
+          "type": "array", "minItems": 5, "maxItems": 5, "uniqueItems": true,
+          "items": { "enum": ["document-hard-gate-failed", "execution-incomplete", "provider-error", "schema-error", "complete-review-artifact-unavailable"] }
+        },
+        "authoritativeResult": { "const": false }, "analysisNumbersAllowed": { "const": false }, "cacheClass": { "const": "none" }
+      }
+    },
+    "terminalStatuses": {
+      "type": "object", "additionalProperties": false, "required": ["succeeded", "review_required", "failed"],
+      "properties": {
+        "succeeded": { "$ref": "#/$defs/succeededStatus" },
+        "review_required": { "$ref": "#/$defs/reviewStatus" },
+        "failed": { "$ref": "#/$defs/failedStatus" }
+      }
+    },
+    "documentHardGate": {
+      "type": "object", "additionalProperties": false,
+      "required": ["failureStatus", "reviewProjectionAllowed", "analysisNumbersAllowed", "conditions"],
+      "properties": {
+        "failureStatus": { "const": "failed" }, "reviewProjectionAllowed": { "const": false },
+        "analysisNumbersAllowed": { "const": false },
+        "conditions": {
+          "type": "array", "minItems": 6, "maxItems": 6, "uniqueItems": true,
+          "items": { "enum": ["tenant-or-owner-mismatch", "job-or-document-identity-mismatch", "page-count-or-page-order-mismatch", "full-text-coverage-incomplete", "document-hash-or-hash-chain-failure", "cross-document-or-cross-version-replay"] }
+        }
+      }
+    },
+    "inactiveScoring": {
+      "type": "object", "additionalProperties": false,
+      "required": ["approved", "effect", "implicitIncludeOrExcludeAllowed"],
+      "properties": {
+        "approved": { "const": false },
+        "effect": { "const": "block-dependent-metrics-score-risk-match-and-advice" },
+        "implicitIncludeOrExcludeAllowed": { "const": false }
+      }
+    },
+    "glmBackoff": {
+      "type": "object", "additionalProperties": false,
+      "required": ["strategy", "fixedMs", "retryAfterStatus", "retryAfterCapMs"],
+      "properties": {
+        "strategy": { "const": "fixed-or-retry-after" }, "fixedMs": { "const": 1000 },
+        "retryAfterStatus": { "const": 429 }, "retryAfterCapMs": { "const": 30000 }
+      }
+    },
+    "glmBudget": {
+      "type": "object", "additionalProperties": false,
+      "required": ["unit", "renderDpi", "imageFormat", "jpegQuality", "maxPageBytes", "defaultPageConcurrency", "productionPageConcurrency", "codeHardConcurrencyCap", "connectTimeoutMs", "attemptTimeoutMs", "stageDeadlineMs", "maxAttempts", "maxAdditionalAttempts", "retryNetworkFailures", "retryHttpStatuses", "backoff"],
+      "properties": {
+        "unit": { "const": "rendered-page" }, "renderDpi": { "const": 200 },
+        "imageFormat": { "const": "jpeg" }, "jpegQuality": { "const": 92 },
+        "maxPageBytes": { "const": 9437184 }, "defaultPageConcurrency": { "const": 3 },
+        "productionPageConcurrency": { "const": 3 }, "codeHardConcurrencyCap": { "const": 4 },
+        "connectTimeoutMs": { "const": 15000 }, "attemptTimeoutMs": { "const": 120000 },
+        "stageDeadlineMs": { "const": 420000 }, "maxAttempts": { "const": 2 },
+        "maxAdditionalAttempts": { "const": 1 }, "retryNetworkFailures": { "const": true },
+        "retryHttpStatuses": {
+          "type": "array", "minItems": 6, "maxItems": 6, "uniqueItems": true,
+          "items": { "enum": [408, 429, 500, 502, 503, 504] }
+        },
+        "backoff": { "$ref": "#/$defs/glmBackoff" }
+      }
+    },
+    "deepseekBackoff": {
+      "type": "object", "additionalProperties": false,
+      "required": ["strategy", "baseMs", "formula"],
+      "properties": {
+        "strategy": { "const": "linear-by-failed-attempt" }, "baseMs": { "const": 800 },
+        "formula": { "const": "800 * failedAttemptNumber" }
+      }
+    },
+    "deepseekBudget": {
+      "type": "object", "additionalProperties": false,
+      "required": ["unit", "behavior", "maxAttemptsDefault", "maxAttemptsMinimum", "maxAttemptsMaximum", "dedicatedConnectTimeoutMs", "dedicatedAttemptTimeoutMs", "currentDeepSeekDeadlineEnforced", "currentTransportBoundedOnly", "backgroundCancellationGuarantee", "targetFullAnalysisDeadlineMs", "retryNetworkFailures", "retryHttpStatusRules", "nonRetryHttpStatusRules", "backoff", "chunkConcurrencyDefault", "chunkConcurrencyMaximum"],
+      "properties": {
+        "unit": { "const": "request-or-chunk" }, "behavior": { "const": "existing-verified-runtime-v1" },
+        "maxAttemptsDefault": { "const": 3 }, "maxAttemptsMinimum": { "const": 1 }, "maxAttemptsMaximum": { "const": 5 },
+        "dedicatedConnectTimeoutMs": { "type": "null" }, "dedicatedAttemptTimeoutMs": { "type": "null" },
+        "currentDeepSeekDeadlineEnforced": { "const": false }, "currentTransportBoundedOnly": { "const": true },
+        "backgroundCancellationGuarantee": { "const": false }, "targetFullAnalysisDeadlineMs": { "const": 900000 },
+        "retryNetworkFailures": { "const": true },
+        "retryHttpStatusRules": { "type": "array", "prefixItems": [{ "const": "429" }, { "const": "500-599" }], "items": false, "minItems": 2, "maxItems": 2 },
+        "nonRetryHttpStatusRules": { "type": "array", "prefixItems": [{ "const": "400-428" }, { "const": "430-499" }], "items": false, "minItems": 2, "maxItems": 2 },
+        "backoff": { "$ref": "#/$defs/deepseekBackoff" }, "chunkConcurrencyDefault": { "const": 3 }, "chunkConcurrencyMaximum": { "const": 4 }
+      }
+    },
+    "executionBudgets": {
+      "type": "object", "additionalProperties": false,
+      "required": ["targetFullAnalysisDeadlineMs", "glmOcrPage", "deepseekRequestOrChunk"],
+      "properties": {
+        "targetFullAnalysisDeadlineMs": { "const": 900000 },
+        "glmOcrPage": { "$ref": "#/$defs/glmBudget" },
+        "deepseekRequestOrChunk": { "$ref": "#/$defs/deepseekBudget" }
+      }
+    },
+    "glmHttpExplicit": {
+      "type": "object", "additionalProperties": false,
+      "required": ["400", "401", "403", "408", "413", "429", "500", "502", "503", "504"],
+      "properties": {
+        "400": { "const": "GLM_OCR_BAD_REQUEST" }, "401": { "const": "GLM_OCR_AUTH_FAILED" },
+        "403": { "const": "GLM_OCR_FORBIDDEN" }, "408": { "const": "GLM_OCR_HTTP_408" },
+        "413": { "const": "GLM_OCR_INPUT_TOO_LARGE" }, "429": { "const": "GLM_OCR_RATE_LIMITED" },
+        "500": { "const": "GLM_OCR_PROVIDER_UNAVAILABLE" }, "502": { "const": "GLM_OCR_PROVIDER_UNAVAILABLE" },
+        "503": { "const": "GLM_OCR_PROVIDER_UNAVAILABLE" }, "504": { "const": "GLM_OCR_PROVIDER_UNAVAILABLE" }
+      }
+    },
+    "deepseekHttpExplicit": {
+      "type": "object", "additionalProperties": false,
+      "required": ["400", "401", "403", "408", "409", "413", "422", "425", "429"],
+      "properties": {
+        "400": { "const": "DEEPSEEK_BAD_REQUEST" }, "401": { "const": "DEEPSEEK_AUTH_FAILED" },
+        "403": { "const": "DEEPSEEK_FORBIDDEN" }, "408": { "const": "DEEPSEEK_HTTP_408" },
+        "409": { "const": "DEEPSEEK_HTTP_409" }, "413": { "const": "DEEPSEEK_INPUT_TOO_LARGE" },
+        "422": { "const": "DEEPSEEK_CONTEXT_LIMIT" }, "425": { "const": "DEEPSEEK_HTTP_425" },
+        "429": { "const": "DEEPSEEK_RATE_LIMITED" }
+      }
+    },
+    "httpPolicy": {
+      "type": "object", "additionalProperties": false,
+      "required": ["explicit", "4xxDefault", "5xxDefault", "unclassified400To599Allowed"],
+      "properties": {
+        "explicit": { "type": "object" }, "4xxDefault": { "type": "string" },
+        "5xxDefault": { "type": "string" }, "unclassified400To599Allowed": { "const": false }
+      }
+    },
+    "httpStatusPolicy": {
+      "type": "object", "additionalProperties": false, "required": ["glmOcr", "deepseek"],
+      "properties": {
+        "glmOcr": {
+          "allOf": [
+            { "$ref": "#/$defs/httpPolicy" },
+            { "type": "object", "properties": { "explicit": { "$ref": "#/$defs/glmHttpExplicit" }, "4xxDefault": { "const": "GLM_OCR_CLIENT_ERROR" }, "5xxDefault": { "const": "GLM_OCR_PROVIDER_ERROR" } } }
+          ]
+        },
+        "deepseek": {
+          "allOf": [
+            { "$ref": "#/$defs/httpPolicy" },
+            { "type": "object", "properties": { "explicit": { "$ref": "#/$defs/deepseekHttpExplicit" }, "4xxDefault": { "const": "DEEPSEEK_CLIENT_ERROR" }, "5xxDefault": { "const": "DEEPSEEK_PROVIDER_UNAVAILABLE" } } }
+          ]
+        }
+      }
+    },
+    "normalizationLimits": {
+      "type": "object", "additionalProperties": false,
+      "required": ["rawResponseMaxBytesPerPage", "regionsPerPageMax", "rawRegionContentMaxChars", "htmlMaxBytesPerRegion", "htmlMaxNodesPerRegion", "htmlMaxDepth", "htmlMaxAttributesPerNode", "htmlMaxAttributeBytes", "tableRowsPerRegionMax", "tableCellsPerRowMax", "pageTextMaxChars", "documentTextMaxChars", "rawHtmlAllowedTags", "rawHtmlAllowedAttributes", "rawHtmlNonTableTagsAllowed", "rawHtmlEventAttributesAllowed", "rawHtmlUrlAttributesAllowed", "rawHtmlStyleAllowed", "normalizedHtmlTagsAllowed", "externalResourceFetchAllowed", "activeMarkupAllowed"],
+      "properties": {
+        "rawResponseMaxBytesPerPage": { "const": 16777216 }, "regionsPerPageMax": { "const": 5000 },
+        "rawRegionContentMaxChars": { "const": 200000 }, "htmlMaxBytesPerRegion": { "const": 1048576 },
+        "htmlMaxNodesPerRegion": { "const": 10000 }, "htmlMaxDepth": { "const": 32 },
+        "htmlMaxAttributesPerNode": { "const": 32 }, "htmlMaxAttributeBytes": { "const": 2048 },
+        "tableRowsPerRegionMax": { "const": 10000 }, "tableCellsPerRowMax": { "const": 256 },
+        "pageTextMaxChars": { "const": 1000000 }, "documentTextMaxChars": { "const": 1000000 },
+        "rawHtmlAllowedTags": { "type": "array", "minItems": 6, "maxItems": 6, "uniqueItems": true, "items": { "enum": ["table", "thead", "tbody", "tr", "th", "td"] } },
+        "rawHtmlAllowedAttributes": { "type": "array", "minItems": 2, "maxItems": 2, "uniqueItems": true, "items": { "enum": ["rowspan", "colspan"] } },
+        "rawHtmlNonTableTagsAllowed": { "const": false }, "rawHtmlEventAttributesAllowed": { "const": false },
+        "rawHtmlUrlAttributesAllowed": { "const": false }, "rawHtmlStyleAllowed": { "const": false },
+        "normalizedHtmlTagsAllowed": { "const": false }, "externalResourceFetchAllowed": { "const": false },
+        "activeMarkupAllowed": { "const": false }
+      }
+    },
+    "coordinateConversion": {
+      "type": "object", "additionalProperties": false,
+      "required": ["version", "internalSpace", "origin", "boundsOrder", "providerInputMode", "pageModeFixed", "allRegionCoordinatesMustBeWithinInclusiveRange", "normalizedXFormula", "normalizedYFormula", "roundingFormula", "precisionDecimals", "negativeZeroNormalized", "postRoundingBoundsAndPositiveExtentRequired", "postRoundingFailureError", "clampAllowed", "axisSwapAllowed", "outOfRangeOrMixedModeError"],
+      "properties": {
+        "version": { "const": "glm-normalized-region-bbox-to-rendered-pixels-v1" },
+        "internalSpace": { "const": "rendered-image-pixels" }, "origin": { "const": "top-left" },
+        "boundsOrder": { "const": "x0-y0-x1-y1" }, "providerInputMode": { "const": "normalized-0-to-1-only" },
+        "pageModeFixed": { "const": true },
+        "allRegionCoordinatesMustBeWithinInclusiveRange": { "type": "array", "prefixItems": [{ "const": 0 }, { "const": 1 }], "items": false, "minItems": 2, "maxItems": 2 },
+        "normalizedXFormula": { "const": "rawX * renderedWidth" }, "normalizedYFormula": { "const": "rawY * renderedHeight" },
+        "roundingFormula": { "const": "Math.round(value * 1000) / 1000" }, "precisionDecimals": { "const": 3 },
+        "negativeZeroNormalized": { "const": true },
+        "postRoundingBoundsAndPositiveExtentRequired": { "const": true },
+        "postRoundingFailureError": { "const": "GLM_OCR_RESPONSE_INVALID" },
+        "clampAllowed": { "const": false }, "axisSwapAllowed": { "const": false },
+        "outOfRangeOrMixedModeError": { "const": "GLM_OCR_RESPONSE_INVALID" }
+      }
+    },
+    "blankPagePolicy": {
+      "type": "object", "additionalProperties": false,
+      "required": ["representation", "requiresRenderedPagePresence", "requiresProviderPagePresence", "requiresZeroNonEmptyRegions", "requiresDeterministicBlankDetector", "unprovenEmptyPageError"],
+      "properties": {
+        "representation": { "const": "verifiedBlank=true,text-empty,blocks-empty" },
+        "requiresRenderedPagePresence": { "const": true }, "requiresProviderPagePresence": { "const": true },
+        "requiresZeroNonEmptyRegions": { "const": true }, "requiresDeterministicBlankDetector": { "const": true },
+        "unprovenEmptyPageError": { "const": "GLM_OCR_PAGE_COVERAGE_MISMATCH" }
+      }
+    },
+    "semanticValidation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["nonWhitespaceCoverageExactlyOnce", "anyCharacterOverlapAllowed", "sourceLineCountMustMatchWithinSourceBlock", "sourceLineOrdinalsMustBeUniqueAndContiguous", "internalCoordinatesMaxPrecisionDecimals", "internalNegativeZeroAllowed", "internalFailureCodes", "publicFailureMappings"],
+      "properties": {
+        "nonWhitespaceCoverageExactlyOnce": { "const": true },
+        "anyCharacterOverlapAllowed": { "const": false },
+        "sourceLineCountMustMatchWithinSourceBlock": { "const": true },
+        "sourceLineOrdinalsMustBeUniqueAndContiguous": { "const": true },
+        "internalCoordinatesMaxPrecisionDecimals": { "const": 3 },
+        "internalNegativeZeroAllowed": { "const": false },
+        "internalFailureCodes": {
+          "type": "object", "additionalProperties": false,
+          "required": ["pageOverlap", "sourceLineCount", "sourceLineSequence", "pageCoordinateCanonical", "bboxCoordinateCanonical", "roundedExtent"],
+          "properties": {
+            "pageOverlap": { "const": "ocr.page-overlap" },
+            "sourceLineCount": { "const": "ocr.source-line-count-consistency" },
+            "sourceLineSequence": { "const": "ocr.source-line-sequence" },
+            "pageCoordinateCanonical": { "const": "ocr.page-coordinate-canonical" },
+            "bboxCoordinateCanonical": { "const": "ocr.bbox-coordinate-canonical" },
+            "roundedExtent": { "const": "provider-bbox.rounded-extent" }
+          }
+        },
+        "publicFailureMappings": {
+          "type": "object", "additionalProperties": false,
+          "required": ["pageOverlap", "sourceLineCount", "sourceLineSequence", "pageCoordinateCanonical", "bboxCoordinateCanonical", "roundedExtent"],
+          "properties": {
+            "pageOverlap": { "const": "GLM_OCR_PAGE_COVERAGE_MISMATCH" },
+            "sourceLineCount": { "const": "GLM_OCR_RESPONSE_INVALID" },
+            "sourceLineSequence": { "const": "GLM_OCR_RESPONSE_INVALID" },
+            "pageCoordinateCanonical": { "const": "GLM_OCR_RESPONSE_INVALID" },
+            "bboxCoordinateCanonical": { "const": "GLM_OCR_RESPONSE_INVALID" },
+            "roundedExtent": { "const": "GLM_OCR_RESPONSE_INVALID" }
+          }
+        }
+      }
+    },
+    "errorEntry": {
+      "type": "object", "additionalProperties": false,
+      "required": ["code", "stage", "provider", "class", "taskErrorClass", "terminalStatus", "publicMessageKey", "automaticRetrySameJob", "sameInputNewJobCanRetry"],
+      "properties": {
+        "code": { "enum": ["GLM_OCR_HTTP_408", "GLM_OCR_RATE_LIMITED", "GLM_OCR_PROVIDER_UNAVAILABLE", "GLM_OCR_PROVIDER_ERROR", "DEEPSEEK_HTTP_408", "DEEPSEEK_HTTP_409", "DEEPSEEK_HTTP_425", "DEEPSEEK_RATE_LIMITED", "DEEPSEEK_PROVIDER_UNAVAILABLE", "DEEPSEEK_OUTPUT_TRUNCATED", "GLM_OCR_NETWORK_ERROR", "GLM_OCR_CONNECT_TIMEOUT", "GLM_OCR_PAGE_TIMEOUT", "OCR_STAGE_DEADLINE_EXCEEDED", "DEEPSEEK_NETWORK_ERROR", "DEEPSEEK_TIMEOUT", "GLM_OCR_PAGE_COVERAGE_MISMATCH", "OCR_RECORD_MEMBERSHIP_UNPROVEN", "OCR_READING_ORDER_CONFLICT", "EVIDENCE_PUBLICATION_BLOCKED", "GLM_OCR_RESPONSE_INVALID", "DEEPSEEK_RESPONSE_INVALID", "GLM_OCR_BAD_REQUEST", "GLM_OCR_INPUT_TOO_LARGE", "DEEPSEEK_INPUT_TOO_LARGE", "DEEPSEEK_CONTEXT_LIMIT", "GLM_OCR_NOT_CONFIGURED", "GLM_OCR_CLIENT_ERROR", "GLM_OCR_AUTH_FAILED", "GLM_OCR_FORBIDDEN", "DEEPSEEK_NOT_CONFIGURED", "DEEPSEEK_BAD_REQUEST", "DEEPSEEK_CLIENT_ERROR", "DEEPSEEK_AUTH_FAILED", "DEEPSEEK_FORBIDDEN"] },
+        "stage": { "enum": ["ocr-config", "ocr-provider", "ocr-preflight", "ocr-normalize", "fact-extraction-config", "fact-extraction", "fact-extraction-preflight", "publication-gate"] },
+        "provider": { "enum": ["zhipu", "deepseek", "none"] },
+        "class": { "enum": ["transient", "permanent", "configuration", "evidence"] },
+        "taskErrorClass": { "enum": ["upstream_transient", "transport_transient", "evidence_permanent", "schema_permanent", "input_permanent", "configuration_permanent", "internal_permanent"] },
+        "terminalStatus": { "const": "failed" },
+        "publicMessageKey": { "enum": ["provider-configuration-unavailable", "provider-connection-interrupted", "provider-timeout", "provider-temporarily-unavailable", "analysis-input-rejected", "provider-response-invalid", "evidence-structure-unproven", "analysis-deadline-exceeded", "analysis-publication-blocked"] },
+        "automaticRetrySameJob": { "type": "boolean" }, "sameInputNewJobCanRetry": { "type": "boolean" }
+      },
+      "allOf": [
+        {
+          "if": {
+            "type": "object", "required": ["code"],
+            "properties": { "code": { "enum": ["GLM_OCR_NETWORK_ERROR", "GLM_OCR_CONNECT_TIMEOUT", "GLM_OCR_PAGE_TIMEOUT", "GLM_OCR_HTTP_408", "GLM_OCR_RATE_LIMITED", "GLM_OCR_PROVIDER_UNAVAILABLE", "DEEPSEEK_NETWORK_ERROR", "DEEPSEEK_TIMEOUT", "DEEPSEEK_RATE_LIMITED", "DEEPSEEK_PROVIDER_UNAVAILABLE"] } }
+          },
+          "then": { "type": "object", "properties": { "automaticRetrySameJob": { "const": true } } },
+          "else": { "type": "object", "properties": { "automaticRetrySameJob": { "const": false } } }
+        },
+        {
+          "if": {
+            "type": "object", "required": ["code"],
+            "properties": { "code": { "enum": ["GLM_OCR_NETWORK_ERROR", "GLM_OCR_CONNECT_TIMEOUT", "GLM_OCR_PAGE_TIMEOUT", "GLM_OCR_HTTP_408", "GLM_OCR_RATE_LIMITED", "GLM_OCR_PROVIDER_UNAVAILABLE", "DEEPSEEK_NETWORK_ERROR", "DEEPSEEK_TIMEOUT", "DEEPSEEK_RATE_LIMITED", "DEEPSEEK_PROVIDER_UNAVAILABLE", "GLM_OCR_PROVIDER_ERROR", "OCR_STAGE_DEADLINE_EXCEEDED", "DEEPSEEK_HTTP_408", "DEEPSEEK_HTTP_409", "DEEPSEEK_HTTP_425", "DEEPSEEK_OUTPUT_TRUNCATED"] } }
+          },
+          "then": { "type": "object", "properties": { "sameInputNewJobCanRetry": { "const": true } } },
+          "else": { "type": "object", "properties": { "sameInputNewJobCanRetry": { "const": false } } }
+        }
+      ]
+    },
+    "publicFailureProtocol": {
+      "type": "object", "additionalProperties": false,
+      "required": ["allowedTaskErrorClasses", "forbiddenFallbackTaskErrorClass", "terminalStatus", "allowedPublicMessageKeys", "providerRawMessageAllowed"],
+      "properties": {
+        "allowedTaskErrorClasses": { "type": "array", "minItems": 7, "maxItems": 7, "uniqueItems": true, "items": { "enum": ["upstream_transient", "transport_transient", "evidence_permanent", "schema_permanent", "input_permanent", "configuration_permanent", "internal_permanent"] } },
+        "forbiddenFallbackTaskErrorClass": { "const": "unknown_permanent" }, "terminalStatus": { "const": "failed" },
+        "allowedPublicMessageKeys": { "type": "array", "minItems": 9, "maxItems": 9, "uniqueItems": true, "items": { "enum": ["provider-configuration-unavailable", "provider-connection-interrupted", "provider-timeout", "provider-temporarily-unavailable", "analysis-input-rejected", "provider-response-invalid", "evidence-structure-unproven", "analysis-deadline-exceeded", "analysis-publication-blocked"] } },
+        "providerRawMessageAllowed": { "const": false }
+      }
+    },
+    "cache": {
+      "type": "object", "additionalProperties": false,
+      "required": ["rawProviderResponseCrossRequestCache", "rawProviderResponseCrossRunCache", "providerCandidateCrossRequestCache", "providerCandidateCrossRunCache", "requestLocalTransientObjectsAreCache", "authoritativeEligibility", "reviewOnlyEligibility", "failureEligibility", "authoritativeAndReviewNamespaceShared", "crossTenantReuseAllowed", "crossVersionReuseAllowed", "crossDocumentReuseAllowed"],
+      "properties": {
+        "rawProviderResponseCrossRequestCache": { "const": false }, "rawProviderResponseCrossRunCache": { "const": false },
+        "providerCandidateCrossRequestCache": { "const": false }, "providerCandidateCrossRunCache": { "const": false },
+        "requestLocalTransientObjectsAreCache": { "const": false },
+        "authoritativeEligibility": { "type": "array", "prefixItems": [{ "const": "succeeded" }], "items": false, "minItems": 1, "maxItems": 1 },
+        "reviewOnlyEligibility": { "type": "array", "prefixItems": [{ "const": "review_required" }], "items": false, "minItems": 1, "maxItems": 1 },
+        "failureEligibility": { "type": "array", "maxItems": 0 },
+        "authoritativeAndReviewNamespaceShared": { "const": false }, "crossTenantReuseAllowed": { "const": false },
+        "crossVersionReuseAllowed": { "const": false }, "crossDocumentReuseAllowed": { "const": false }
+      }
+    },
+    "secrets": {
+      "type": "object", "additionalProperties": false,
+      "required": ["manager", "injection", "frontend", "healthExposure", "providerFallbackCredentialsAllowed", "variables"],
+      "properties": {
+        "manager": { "const": "external-secret-manager" }, "injection": { "const": "server-process-environment" },
+        "frontend": {
+          "type": "object", "additionalProperties": false,
+          "required": ["secretValueExposureAllowed", "retrievableProviderCredentialConfigAllowed", "identifierNameMentionAllowed"],
+          "properties": {
+            "secretValueExposureAllowed": { "const": false }, "retrievableProviderCredentialConfigAllowed": { "const": false },
+            "identifierNameMentionAllowed": { "const": true }
+          }
+        },
+        "healthExposure": { "const": "configured-boolean-only" }, "providerFallbackCredentialsAllowed": { "const": false },
+        "variables": {
+          "type": "object", "additionalProperties": false, "required": ["zhipu", "deepseek"],
+          "properties": { "zhipu": { "const": "ZHIPU_GLM_OCR_API_KEY" }, "deepseek": { "const": "DEEPSEEK_API_KEY" } }
+        }
+      }
+    },
+    "outboundData": {
+      "type": "object", "additionalProperties": false,
+      "required": ["zhipu", "deepseek", "informedAuthorizationRequired", "providerReviewRequiredBeforeEnablement", "downstreamEndUserPolicyCoverageMayBeAssumed", "publicImageUrlAllowed", "providerPayloadLoggingAllowed"],
+      "properties": {
+        "zhipu": { "const": "rendered-page-image-containing-personal-sensitive-credit-information" },
+        "deepseek": { "const": "normalized-credit-report-text-containing-personal-sensitive-credit-information" },
+        "informedAuthorizationRequired": { "const": true }, "providerReviewRequiredBeforeEnablement": { "const": true },
+        "downstreamEndUserPolicyCoverageMayBeAssumed": { "const": false }, "publicImageUrlAllowed": { "const": false },
+        "providerPayloadLoggingAllowed": { "const": false }
+      }
+    },
+    "rollback": {
+      "type": "object", "additionalProperties": false,
+      "required": ["fallbackToLegacyOcrAllowed", "phase0", "futureGlmEnablement", "reviewRequired"],
+      "properties": {
+        "fallbackToLegacyOcrAllowed": { "const": false }, "phase0": { "const": "revert-document-and-contract-commit" },
+        "futureGlmEnablement": { "const": "disable-scanned-analysis-capability-and-return-explicit-unavailable-error" },
+        "reviewRequired": { "const": "disable-review-projection-without-changing-authoritative-results" }
+      }
+    }
+  }
+}

@@ -1,0 +1,455 @@
+/* ───────────────────────────────────────────────
+ * 全局样式：还原旧版 Web 的 view/text 自定义元素盒模型 + 项目设计令牌
+ * （从旧版样式迁移；rpx 由 postcss 自动转 vw）
+ * ─────────────────────────────────────────────── */
+
+:root {
+  --rpt-safe-bottom: env(safe-area-inset-bottom, 0px);
+  --rpt-safe-top: env(safe-area-inset-top, 0px);
+  --rpt-tabbar-height: 84px;
+  --rpt-nav-height: 112rpx;
+  --rpt-font-xs: 22rpx;
+  --rpt-font-sm: 24rpx;
+  --rpt-font-md: 28rpx;
+  --rpt-font-lg: 32rpx;
+  --rpt-font-xl: 36rpx;
+  --rpt-space-1: 8rpx;
+  --rpt-space-2: 12rpx;
+  --rpt-space-3: 16rpx;
+  --rpt-space-4: 24rpx;
+  --rpt-space-5: 32rpx;
+  --rpt-space-6: 40rpx;
+  --rpt-radius-sm: 6px;
+  --rpt-radius-md: 8px;
+  --rpt-radius-lg: 8px;
+  --rpt-radius-xl: 8px;
+  --rpt-touch-min: 44px;
+  --rpt-color-primary: #086CEA;
+  --rpt-color-primary-dark: #0759C7;
+  --rpt-color-primary-soft: #EAF3FF;
+  --rpt-color-success: #16A34A;
+  --rpt-color-warning: #D97706;
+  --rpt-color-danger: #DC2626;
+  --rpt-color-info: #2563EB;
+  --rpt-color-bg-page: #F3F7FF;
+  --rpt-color-surface: #FFFFFF;
+  --rpt-color-surface-soft: #F8FBFF;
+  --rpt-color-border: #DDE8F7;
+  --rpt-color-text-primary: #071B3D;
+  --rpt-color-text-secondary: #52627A;
+  --rpt-color-text-muted: #8B98AA;
+  --rpt-shadow-sm: 0 6px 18px rgba(26, 65, 120, 0.05);
+  --rpt-shadow-md: 0 12px 28px rgba(26, 65, 120, 0.08);
+  --rpt-shadow-lg: 0 18px 42px rgba(26, 65, 120, 0.12);
+  --rpt-shadow-primary: 0 12px 24px rgba(8, 108, 234, 0.2);
+  --rpt-header-gradient: linear-gradient(135deg, #2EA0FF 0%, #086CEA 58%, #0759C7 100%);
+  --rpt-surface-gradient: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(248,251,255,0.98) 100%);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  background-color: var(--rpt-color-bg-page);
+  color: var(--rpt-color-text-primary);
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#app {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 旧版 Web 盒模型：view 默认竖向 flex 容器 */
+view {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  min-width: 0;
+  min-height: 0;
+}
+
+text {
+  box-sizing: border-box;
+  display: block;
+  white-space: pre-line;
+  word-break: break-word;
+  font-size: var(--rpt-font-md);
+  line-height: 1.45;
+  color: var(--rpt-color-text-primary);
+}
+
+button {
+  border: none;
+  background: none;
+  line-height: 1.2;
+  font-family: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* ── 结构辅助 ── */
+.rpt-page { min-height: 100vh; min-height: 100dvh; background-color: var(--rpt-color-bg-page); display: flex; flex-direction: column; }
+.rpt-page-hpad { padding-left: var(--rpt-space-4); padding-right: var(--rpt-space-4); }
+.rpt-page-bottom { height: calc(var(--rpt-tabbar-height) + var(--rpt-safe-bottom)); }
+.rpt-scroll { flex: 1; }
+.rpt-nav-shell { background: var(--rpt-header-gradient); padding-top: var(--rpt-safe-top); }
+.rpt-nav-row { height: var(--rpt-nav-height); padding: 0 var(--rpt-space-4); flex-direction: row; align-items: center; justify-content: space-between; }
+
+/* ── 布局工具 ── */
+.flex { display: flex; }
+.flex-row { flex-direction: row; }
+.flex-column { flex-direction: column; }
+.flex-1 { flex: 1; }
+.flex-center { display: flex; align-items: center; justify-content: center; }
+.flex-between { display: flex; justify-content: space-between; align-items: center; }
+
+/* ── 文本/颜色工具 ── */
+.text-primary { color: var(--rpt-color-primary); }
+.text-secondary { color: var(--rpt-color-text-secondary); }
+.text-muted { color: var(--rpt-color-text-muted); }
+.text-error { color: var(--rpt-color-danger); }
+.text-success { color: var(--rpt-color-success); }
+.text-warning { color: var(--rpt-color-warning); }
+.bg-primary { background: var(--rpt-header-gradient); }
+.bg-white { background-color: var(--rpt-color-surface); }
+
+/* ── 卡片 ── */
+.card, .rpt-card { background: var(--rpt-surface-gradient); border-radius: var(--rpt-radius-lg); box-shadow: var(--rpt-shadow-sm); border: 1px solid var(--rpt-color-border); }
+.rpt-card-soft { background: rgba(255,255,255,0.84); border-radius: var(--rpt-radius-lg); box-shadow: var(--rpt-shadow-sm); border: 1px solid rgba(221,232,247,0.86); }
+
+/* ── 按钮 ── */
+.btn-primary, .rpt-btn-primary { background: var(--rpt-header-gradient); color: #fff; border: none; border-radius: var(--rpt-radius-lg); font-weight: 700; min-height: var(--rpt-touch-min); font-size: var(--rpt-font-md); display: flex; align-items: center; justify-content: center; box-shadow: var(--rpt-shadow-primary); }
+.rpt-btn-secondary { background: #fff; color: var(--rpt-color-primary); border: 1px solid #BFDBFE; border-radius: var(--rpt-radius-lg); min-height: var(--rpt-touch-min); font-size: var(--rpt-font-md); font-weight: 600; display: flex; align-items: center; justify-content: center; }
+.rpt-btn-ghost { background: var(--rpt-color-primary-soft); color: var(--rpt-color-primary); border: none; border-radius: var(--rpt-radius-md); min-height: var(--rpt-touch-min); font-size: var(--rpt-font-sm); font-weight: 600; display: flex; align-items: center; justify-content: center; }
+
+/* ── 统一返回按钮 ── */
+.rpt-backbtn { width: 64rpx; height: 64rpx; border-radius: 999rpx; display: flex; flex-direction: row; align-items: center; justify-content: center; flex-shrink: 0; }
+.rpt-backbtn-dark { background-color: rgba(255,255,255,0.22); border: 1rpx solid rgba(255,255,255,0.35); }
+.rpt-backbtn-light { background-color: #EEF1F6; border: 1rpx solid rgba(31,41,55,0.1); }
+
+/* ── 空状态 ── */
+.rpt-empty { background: var(--rpt-color-surface); border-radius: var(--rpt-radius-xl); padding: var(--rpt-space-6) var(--rpt-space-5); align-items: center; box-shadow: var(--rpt-shadow-sm); }
+.rpt-empty-title { font-size: var(--rpt-font-lg); font-weight: 700; color: var(--rpt-color-text-primary); margin-top: var(--rpt-space-3); }
+.rpt-empty-sub { font-size: var(--rpt-font-sm); color: var(--rpt-color-text-secondary); text-align: center; line-height: 1.6; margin-top: var(--rpt-space-2); }
+
+/* ── 区块标题 ── */
+.rpt-section-head { flex-direction: row; align-items: center; margin-bottom: var(--rpt-space-3); }
+.rpt-section-mark { width: 6rpx; height: 28rpx; background: var(--rpt-header-gradient); border-radius: 3rpx; margin-right: var(--rpt-space-2); }
+.rpt-section-title { font-size: var(--rpt-font-md); font-weight: 700; color: var(--rpt-color-text-primary); }
+
+.safe-area-bottom { padding-bottom: var(--rpt-safe-bottom); }
+
+::-webkit-scrollbar { display: none; }
+
+/* ── 平台蓝色视觉统一层：让主流程页面靠近首页风格 ── */
+.rpt-page,
+.page {
+  height: 100vh;
+  height: 100dvh;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(231, 242, 255, 0.95) 0%, rgba(247, 250, 255, 0.96) 42%, rgba(243, 247, 255, 1) 100%) !important;
+}
+
+.nav {
+  background: rgba(248,251,255,0.94) !important;
+  border-bottom-color: rgba(219, 234, 254, 0.86) !important;
+  box-shadow: 0 10px 28px rgba(28, 88, 152, 0.045) !important;
+  backdrop-filter: blur(18px);
+}
+
+.rpt-backbtn-light {
+  background: rgba(255,255,255,0.72) !important;
+  border-color: #DCE8F8 !important;
+  box-shadow: 0 6px 14px rgba(33, 80, 136, 0.06);
+}
+
+.card,
+.rpt-card,
+.hero,
+.banner,
+.summary-card,
+.summary-panel,
+.flow-card,
+.report-card,
+.opt-card,
+.tips,
+.state-card,
+.state-card-small,
+.prod-card,
+.user-card,
+.report-panel,
+.consult-panel,
+.menu,
+.advisor-card,
+.contact-card,
+.record-card,
+.client-card,
+.task-card,
+.ticket-card,
+.context-card,
+.status-card,
+.section,
+.quick-card,
+.metric,
+.summary-cell,
+.path-card,
+.recent-section,
+.material-card,
+.setting-card,
+.reminder-card,
+.report-context,
+.action-panel,
+.feedback-panel,
+.debt-card,
+.risk-cell,
+.plan-card,
+.tip-card,
+.doc-card,
+.content {
+  background: var(--rpt-surface-gradient) !important;
+  border-color: rgba(219, 234, 254, 0.92) !important;
+  box-shadow: 0 12px 30px rgba(26, 65, 120, 0.055) !important;
+}
+
+.btn-primary,
+.rpt-btn-primary,
+.banner-btn,
+.state-btn,
+.state-btn-small,
+.act-primary,
+.send-btn,
+.book-btn,
+.login-btn,
+.submit,
+.error-btn,
+.material-primary,
+.bottom-primary,
+.action-primary,
+.conversion-btn,
+.footer-primary,
+.report-panel-primary,
+.summary-primary,
+.message-report-primary,
+.return-context-primary,
+.sync-retry,
+.writeback-alert-action,
+.filter-chip-on,
+.filter-chip.active,
+.save-btn,
+.chat-panel-btn {
+  background: var(--rpt-header-gradient) !important;
+  border-color: #086CEA !important;
+  box-shadow: var(--rpt-shadow-primary) !important;
+}
+
+.batch-danger,
+.action-notice.danger .action-notice-btn {
+  background: #DC2626 !important;
+  border-color: #DC2626 !important;
+  box-shadow: 0 10px 22px rgba(220, 38, 38, 0.16) !important;
+}
+
+.banner-btn-soft,
+.report-panel-view,
+.consult-panel-view,
+.record-action-soft,
+.act-ghost,
+.report-panel-ghost,
+.bottom-ghost,
+.material-ghost,
+.filter-chip,
+.tab.active,
+.menu-icon-blue,
+.menu-icon-red,
+.quick-icon,
+.hero-badge,
+.avatar,
+.feat-sym,
+.step-idx,
+.repay-icon,
+.path-blue .path-num,
+.path-blue .path-icon {
+  background: #EAF3FF !important;
+  border-color: #DBEAFE !important;
+}
+
+.nav-link-text,
+.nav-action,
+.nav-right-text,
+.settings-entry-text,
+.pref-mode,
+.permission-pill-text,
+.section-more,
+.section-action,
+.report-panel-kicker,
+.report-panel-view-text,
+.consult-panel-view-text,
+.banner-btn-soft-text,
+.report-context-link,
+.consult-status-link,
+.search-clear,
+.sort-chip-text.active,
+.feat-sym-text,
+.step-idx,
+.menu-icon-text-blue,
+.record-action-soft-text,
+.state-ghost-text,
+.tab-text.active,
+.tab-count.active {
+  color: #0878F2 !important;
+}
+
+.menu-text,
+.prod-name,
+.user-name,
+.section-title,
+.hero-title,
+.banner-title,
+.report-panel-title,
+.state-title,
+.material-title,
+.advisor-name,
+.client-name,
+.task-title,
+.ticket-title {
+  color: #071B3D !important;
+}
+
+.menu-note,
+.prod-inst,
+.banner-sub,
+.hero-sub,
+.section-note,
+.state-sub,
+.material-desc,
+.report-panel-sub,
+.field-label,
+.kv-label {
+  color: #64748B !important;
+}
+
+.msg-bubble.mine {
+  background: var(--rpt-header-gradient) !important;
+  border-color: #0878F2 !important;
+}
+
+input,
+textarea,
+.search-box,
+.composer-input,
+.field-input,
+.note-input,
+.prompt-input {
+  background: rgba(248,251,255,0.95) !important;
+  border-color: #DCE8F8 !important;
+  color: #071B3D !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.75);
+}
+
+.scroll-body {
+  flex: 1;
+  min-height: 0;
+  height: auto !important;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  background:
+    linear-gradient(180deg, rgba(231, 242, 255, 0.95) 0%, rgba(247,250,255,0.98) 52%, #F5F8FE 100%) !important;
+}
+
+.filter-chip,
+.tag,
+.debt-segment-chip,
+.hero-tag,
+.status,
+.badge,
+.match-badge {
+  box-shadow: none !important;
+}
+
+/* ═══════════════════════════════════════════════════
+ * 响应式断点约定（桌面适配基础设施，配合 src/styles/responsive.css）
+ * 断点值（移动优先，均为 min-width）：
+ *   768px  平板：辅助信息并排、表单可双列
+ *   1024px 桌面：双栏布局起点（侧栏 / master-detail）
+ *   1440px 宽桌面：内容限宽 + 大留白
+ * 布局切换一律用 CSS @media，禁止 JS resize 监听。
+ * 尺寸继续使用 px / rpx（postcss 固定 1rpx=0.5px），不引入 vw 缩放。
+ * ═══════════════════════════════════════════════════ */
+
+@media (min-width: 1024px) {
+  /* 桌面容器：居中限宽 */
+  .rpt-desktop-wrap {
+    width: 100%;
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* 页面级留白：移动端 12px 横向留白在宽屏放大 */
+  .rpt-page-hpad { padding-left: 40px; padding-right: 40px; }
+}
+
+@media (min-width: 1440px) {
+  .rpt-page-hpad { padding-left: 64px; padding-right: 64px; }
+}
+
+/* ═══════════════════════════════════════════════════
+ * Vant 4 主题变量覆盖：对齐主色 #086CEA
+ * ═══════════════════════════════════════════════════ */
+:root {
+  --van-primary-color: #086CEA;
+  --van-primary-color-dark: #0759C7;
+  --van-primary-color-active: #065BD0;
+  --van-blue: #086CEA;
+
+  /* 按钮 */
+  --van-button-primary-background-color: #086CEA;
+  --van-button-primary-border-color: #086CEA;
+  --van-button-primary-background-color-active: #0759C7;
+  --van-button-primary-border-color-active: #0759C7;
+  --van-button-border-radius: 8px;
+  --van-button-round-border-radius: 8px;
+
+  /* Toast */
+  --van-toast-loading-icon-color: #fff;
+
+  /* Dialog */
+  --van-dialog-confirm-button-text-color: #086CEA;
+  --van-dialog-border-radius: 12px;
+
+  /* Field */
+  --van-field-input-text-color: #071B3D;
+  --van-field-label-color: #52627A;
+  --van-field-placeholder-text-color: #8B98AA;
+  --van-cell-background-color: transparent;
+
+  /* Checkbox */
+  --van-checkbox-checked-icon-background-color: #086CEA;
+  --van-checkbox-checked-icon-border-color: #086CEA;
+
+  /* ActionSheet */
+  --van-action-sheet-item-text-color: #071B3D;
+  --van-action-sheet-cancel-text-color: #52627A;
+
+  /* Popup */
+  --van-popup-round-radius: 12px;
+}

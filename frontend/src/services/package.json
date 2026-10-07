@@ -1,0 +1,4 @@
+{
+  "type": "module",
+  "description": "ESM 模块目录 — 旧版浏览器 Web services（Vite 构建；Node.js 测试通过动态 import() 加载）"
+}

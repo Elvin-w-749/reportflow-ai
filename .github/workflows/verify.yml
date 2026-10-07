@@ -1,0 +1,89 @@
+name: fullstack-verify
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  repository-safety:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - run: npm ci --no-audit --no-fund
+      - run: node scripts/verify-phase0-contracts.mjs
+      - run: node scripts/verify-repository.mjs
+
+  frontend:
+    runs-on: windows-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+        env:
+          npm_config_registry: https://registry.npmjs.org
+      - name: Audit dependencies against the official npm advisory source
+        run: npm audit --audit-level=high --registry=https://registry.npmjs.org
+      - run: npm test
+      - run: npm run test:runtime:v4
+      - run: npm run build:legacy
+
+  backend:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+      - run: npm ci --no-audit --no-fund
+      - name: Check backend syntax
+        shell: bash
+        run: |
+          for file in \
+            server.js \
+            backend/services/analysisCoordinator.js \
+            backend/services/analysisTaskService.js \
+            backend/services/analysisIdentity.js \
+            backend/services/creditAnalysisService.js \
+            backend/services/creditTextUtils.js \
+            backend/services/queryWindowPolicy.js \
+            backend/routes/business.js \
+            backend/routes/teacher.js \
+            backend/utils/institutionPolicy.js \
+            backend/utils/releaseIdentity.js \
+            backend/utils/trustedAnalysisEvent.js \
+            creditRuleEngine.js \
+            moonshotVision.js \
+            rapidOcrIdentity.js \
+            scripts/verifyRapidOcrModels.js
+          do
+            node --check "$file"
+          done
+      - name: Test complete backend suite
+        run: npm test
+      - name: Test frontend/backend decision parity
+        run: node --test --test-reporter=spec ../tests/matchCoreCrossLayerParity.test.js
+      - run: npm run test:legacy-api

@@ -1,0 +1,391 @@
+{
+  "schemaVersion": 2,
+  "contractId": "credit-analysis-phase0-v2",
+  "approvedDate": "2026-08-17",
+  "productionBaseline": {
+    "gitCommit": "abcdef1234567890abcdef1234567890abcdef12",
+    "webRelease": "20260817-125147-evidence-v7-abcdef1-web",
+    "apiRelease": "20260817-125147-evidence-v7-abcdef1-api"
+  },
+  "implementationState": {
+    "phase": 0,
+    "contractOnly": true,
+    "productionBehaviorChanged": false,
+    "glmClientImplemented": false,
+    "ocrAdapterImplemented": false,
+    "reviewRequiredImplemented": false,
+    "productionRouteChanged": false,
+    "deployed": false
+  },
+  "targetProviders": {
+    "ocr": {
+      "provider": "zhipu-layout-parsing",
+      "model": "glm-ocr",
+      "endpoint": "https://open.bigmodel.cn/api/paas/v4/layout_parsing",
+      "role": "scanned-page-layout-candidate-source",
+      "input": "in-memory-data-uri",
+      "authoritative": false,
+      "automaticFallbackProviders": []
+    },
+    "factExtraction": {
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "endpoint": "https://api.deepseek.com/v1/chat/completions",
+      "role": "candidate-fact-extraction",
+      "authoritative": false,
+      "automaticFallbackProviders": []
+    }
+  },
+  "authority": {
+    "factAcceptance": "evidence-binder",
+    "derivedMetrics": "deterministic-rules",
+    "score": "deterministic-rules",
+    "modelSelfAttestationAllowed": false
+  },
+  "sourceRouting": {
+    "completeNativeTextPdf": {
+      "reader": "mupdf",
+      "glmCallCount": 0,
+      "factExtractionProvider": "deepseek",
+      "legacyOcrFallbackAllowed": false
+    },
+    "scannedPdfOrImage": {
+      "renderer": ["mupdf", "sharp"],
+      "ocrProvider": "zhipu-layout-parsing",
+      "ocrModel": "glm-ocr",
+      "wholeDocumentSingleOcrProvider": true,
+      "legacyOcrFallbackAllowed": false
+    },
+    "mixedNativeAndOcrWithinOneScannedDocument": false,
+    "automaticFallbackProviders": [],
+    "forbiddenProductionOcrFallbacks": [
+      "tesseract",
+      "rapidocr",
+      "moonshot",
+      "kimi",
+      "client-model"
+    ]
+  },
+  "terminalStatuses": {
+    "succeeded": {
+      "documentHardGate": "passed",
+      "executionCompletion": "complete",
+      "evidenceArtifactIntegrity": "complete",
+      "reviewArtifactIntegrity": "not-applicable",
+      "factAndDecisionDependencies": "closed",
+      "authoritativeResult": true,
+      "scoreRiskMatchAdviceAllowed": true,
+      "cacheClass": "authoritative"
+    },
+    "review_required": {
+      "documentHardGate": "passed",
+      "executionCompletion": "complete",
+      "evidenceArtifactIntegrity": "complete",
+      "reviewArtifactIntegrity": "complete",
+      "onlyFieldOrMetricUnresolved": true,
+      "minimumAcceptedFactsRequired": false,
+      "factAndDecisionDependencies": "partially-open",
+      "authoritativeResult": false,
+      "scoreRiskMatchAdviceAllowed": false,
+      "cacheClass": "review-only-v1"
+    },
+    "failed": {
+      "documentHardGate": "failed-or-not-evaluable",
+      "executionCompletion": "any",
+      "reviewArtifactIntegrity": "incomplete-or-unavailable",
+      "failureCauses": [
+        "document-hard-gate-failed",
+        "execution-incomplete",
+        "provider-error",
+        "schema-error",
+        "complete-review-artifact-unavailable"
+      ],
+      "authoritativeResult": false,
+      "analysisNumbersAllowed": false,
+      "cacheClass": "none"
+    }
+  },
+  "factStates": ["accepted", "unknown", "absent", "not_applicable", "conflict"],
+  "documentHardGate": {
+    "failureStatus": "failed",
+    "reviewProjectionAllowed": false,
+    "analysisNumbersAllowed": false,
+    "conditions": [
+      "tenant-or-owner-mismatch",
+      "job-or-document-identity-mismatch",
+      "page-count-or-page-order-mismatch",
+      "full-text-coverage-incomplete",
+      "document-hash-or-hash-chain-failure",
+      "cross-document-or-cross-version-replay"
+    ]
+  },
+  "inactiveScoring": {
+    "approved": false,
+    "effect": "block-dependent-metrics-score-risk-match-and-advice",
+    "implicitIncludeOrExcludeAllowed": false
+  },
+  "executionBudgets": {
+    "targetFullAnalysisDeadlineMs": 900000,
+    "glmOcrPage": {
+      "unit": "rendered-page",
+      "renderDpi": 200,
+      "imageFormat": "jpeg",
+      "jpegQuality": 92,
+      "maxPageBytes": 9437184,
+      "defaultPageConcurrency": 3,
+      "productionPageConcurrency": 3,
+      "codeHardConcurrencyCap": 4,
+      "connectTimeoutMs": 15000,
+      "attemptTimeoutMs": 120000,
+      "stageDeadlineMs": 420000,
+      "maxAttempts": 2,
+      "maxAdditionalAttempts": 1,
+      "retryNetworkFailures": true,
+      "retryHttpStatuses": [408, 429, 500, 502, 503, 504],
+      "backoff": {
+        "strategy": "fixed-or-retry-after",
+        "fixedMs": 1000,
+        "retryAfterStatus": 429,
+        "retryAfterCapMs": 30000
+      }
+    },
+    "deepseekRequestOrChunk": {
+      "unit": "request-or-chunk",
+      "behavior": "existing-verified-runtime-v1",
+      "maxAttemptsDefault": 3,
+      "maxAttemptsMinimum": 1,
+      "maxAttemptsMaximum": 5,
+      "dedicatedConnectTimeoutMs": null,
+      "dedicatedAttemptTimeoutMs": null,
+      "currentDeepSeekDeadlineEnforced": false,
+      "currentTransportBoundedOnly": true,
+      "backgroundCancellationGuarantee": false,
+      "targetFullAnalysisDeadlineMs": 900000,
+      "retryNetworkFailures": true,
+      "retryHttpStatusRules": ["429", "500-599"],
+      "nonRetryHttpStatusRules": ["400-428", "430-499"],
+      "backoff": {
+        "strategy": "linear-by-failed-attempt",
+        "baseMs": 800,
+        "formula": "800 * failedAttemptNumber"
+      },
+      "chunkConcurrencyDefault": 3,
+      "chunkConcurrencyMaximum": 4
+    }
+  },
+  "httpStatusPolicy": {
+    "glmOcr": {
+      "explicit": {
+        "400": "GLM_OCR_BAD_REQUEST",
+        "401": "GLM_OCR_AUTH_FAILED",
+        "403": "GLM_OCR_FORBIDDEN",
+        "408": "GLM_OCR_HTTP_408",
+        "413": "GLM_OCR_INPUT_TOO_LARGE",
+        "429": "GLM_OCR_RATE_LIMITED",
+        "500": "GLM_OCR_PROVIDER_UNAVAILABLE",
+        "502": "GLM_OCR_PROVIDER_UNAVAILABLE",
+        "503": "GLM_OCR_PROVIDER_UNAVAILABLE",
+        "504": "GLM_OCR_PROVIDER_UNAVAILABLE"
+      },
+      "4xxDefault": "GLM_OCR_CLIENT_ERROR",
+      "5xxDefault": "GLM_OCR_PROVIDER_ERROR",
+      "unclassified400To599Allowed": false
+    },
+    "deepseek": {
+      "explicit": {
+        "400": "DEEPSEEK_BAD_REQUEST",
+        "401": "DEEPSEEK_AUTH_FAILED",
+        "403": "DEEPSEEK_FORBIDDEN",
+        "408": "DEEPSEEK_HTTP_408",
+        "409": "DEEPSEEK_HTTP_409",
+        "413": "DEEPSEEK_INPUT_TOO_LARGE",
+        "422": "DEEPSEEK_CONTEXT_LIMIT",
+        "425": "DEEPSEEK_HTTP_425",
+        "429": "DEEPSEEK_RATE_LIMITED"
+      },
+      "4xxDefault": "DEEPSEEK_CLIENT_ERROR",
+      "5xxDefault": "DEEPSEEK_PROVIDER_UNAVAILABLE",
+      "unclassified400To599Allowed": false
+    }
+  },
+  "normalizationLimits": {
+    "rawResponseMaxBytesPerPage": 16777216,
+    "regionsPerPageMax": 5000,
+    "rawRegionContentMaxChars": 200000,
+    "htmlMaxBytesPerRegion": 1048576,
+    "htmlMaxNodesPerRegion": 10000,
+    "htmlMaxDepth": 32,
+    "htmlMaxAttributesPerNode": 32,
+    "htmlMaxAttributeBytes": 2048,
+    "tableRowsPerRegionMax": 10000,
+    "tableCellsPerRowMax": 256,
+    "pageTextMaxChars": 1000000,
+    "documentTextMaxChars": 1000000,
+    "rawHtmlAllowedTags": ["table", "thead", "tbody", "tr", "th", "td"],
+    "rawHtmlAllowedAttributes": ["rowspan", "colspan"],
+    "rawHtmlNonTableTagsAllowed": false,
+    "rawHtmlEventAttributesAllowed": false,
+    "rawHtmlUrlAttributesAllowed": false,
+    "rawHtmlStyleAllowed": false,
+    "normalizedHtmlTagsAllowed": false,
+    "externalResourceFetchAllowed": false,
+    "activeMarkupAllowed": false
+  },
+  "coordinateConversion": {
+    "version": "glm-normalized-region-bbox-to-rendered-pixels-v1",
+    "internalSpace": "rendered-image-pixels",
+    "origin": "top-left",
+    "boundsOrder": "x0-y0-x1-y1",
+    "providerInputMode": "normalized-0-to-1-only",
+    "pageModeFixed": true,
+    "allRegionCoordinatesMustBeWithinInclusiveRange": [0, 1],
+    "normalizedXFormula": "rawX * renderedWidth",
+    "normalizedYFormula": "rawY * renderedHeight",
+    "roundingFormula": "Math.round(value * 1000) / 1000",
+    "precisionDecimals": 3,
+    "negativeZeroNormalized": true,
+    "postRoundingBoundsAndPositiveExtentRequired": true,
+    "postRoundingFailureError": "GLM_OCR_RESPONSE_INVALID",
+    "clampAllowed": false,
+    "axisSwapAllowed": false,
+    "outOfRangeOrMixedModeError": "GLM_OCR_RESPONSE_INVALID"
+  },
+  "blankPagePolicy": {
+    "representation": "verifiedBlank=true,text-empty,blocks-empty",
+    "requiresRenderedPagePresence": true,
+    "requiresProviderPagePresence": true,
+    "requiresZeroNonEmptyRegions": true,
+    "requiresDeterministicBlankDetector": true,
+    "unprovenEmptyPageError": "GLM_OCR_PAGE_COVERAGE_MISMATCH"
+  },
+  "semanticValidation": {
+    "nonWhitespaceCoverageExactlyOnce": true,
+    "anyCharacterOverlapAllowed": false,
+    "sourceLineCountMustMatchWithinSourceBlock": true,
+    "sourceLineOrdinalsMustBeUniqueAndContiguous": true,
+    "internalCoordinatesMaxPrecisionDecimals": 3,
+    "internalNegativeZeroAllowed": false,
+    "internalFailureCodes": {
+      "pageOverlap": "ocr.page-overlap",
+      "sourceLineCount": "ocr.source-line-count-consistency",
+      "sourceLineSequence": "ocr.source-line-sequence",
+      "pageCoordinateCanonical": "ocr.page-coordinate-canonical",
+      "bboxCoordinateCanonical": "ocr.bbox-coordinate-canonical",
+      "roundedExtent": "provider-bbox.rounded-extent"
+    },
+    "publicFailureMappings": {
+      "pageOverlap": "GLM_OCR_PAGE_COVERAGE_MISMATCH",
+      "sourceLineCount": "GLM_OCR_RESPONSE_INVALID",
+      "sourceLineSequence": "GLM_OCR_RESPONSE_INVALID",
+      "pageCoordinateCanonical": "GLM_OCR_RESPONSE_INVALID",
+      "bboxCoordinateCanonical": "GLM_OCR_RESPONSE_INVALID",
+      "roundedExtent": "GLM_OCR_RESPONSE_INVALID"
+    }
+  },
+  "errors": [
+    {"code":"GLM_OCR_NOT_CONFIGURED","stage":"ocr-config","provider":"zhipu","class":"configuration","taskErrorClass":"configuration_permanent","terminalStatus":"failed","publicMessageKey":"provider-configuration-unavailable","automaticRetrySameJob":false,"sameInputNewJobCanRetry":false},
+    {"code":"GLM_OCR_NETWORK_ERROR","stage":"ocr-provider","provider":"zhipu","class":"transient","taskErrorClass":"transport_transient","terminalStatus":"failed","publicMessageKey":"provider-connection-interrupted","automaticRetrySameJob":true,"sameInputNewJobCanRetry":true},
+    {"code":"GLM_OCR_CONNECT_TIMEOUT","stage":"ocr-provider","provider":"zhipu","class":"transient","taskErrorClass":"transport_transient","terminalStatus":"failed","publicMessageKey":"provider-timeout","automaticRetrySameJob":true,"sameInputNewJobCanRetry":true},
+    {"code":"GLM_OCR_PAGE_TIMEOUT","stage":"ocr-provider","provider":"zhipu","class":"transient","taskErrorClass":"transport_transient","terminalStatus":"failed","publicMessageKey":"provider-timeout","automaticRetrySameJob":true,"sameInputNewJobCanRetry":true},
+    {"code":"GLM_OCR_HTTP_408","stage":"ocr-provider","provider":"zhipu","class":"transient","taskErrorClass":"upstream_transient","terminalStatus":"failed","publicMessageKey":"provider-timeout","automaticRetrySameJob":true,"sameInputNewJobCanRetry":true},
+    {"code":"GLM_OCR_RATE_LIMITED","stage":"ocr-provider","provider":"zhipu","class":"transient","taskErrorClass":"upstream_transient","terminalStatus":"failed","publicMessageKey":"provider-temporarily-unavailable","automaticRetrySameJob":true,"sameInputNewJobCanRetry":true},
+    {"code":"GLM_OCR_PROVIDER_UNAVAILABLE","stage":"ocr-provider","provider":"zhipu","class":"transient","taskErrorClass":"upstream_transient","terminalStatus":"failed","publicMessageKey":"provider-temporarily-unavailable","automaticRetrySameJob":true,"sameInputNewJobCanRetry":true},
+    {"code":"GLM_OCR_PROVIDER_ERROR","stage":"ocr-provider","provider":"zhipu","class":"transient","taskErrorClass":"upstream_transient","terminalStatus":"failed","publicMessageKey":"provider-temporarily-unavailable","automaticRetrySameJob":false,"sameInputNewJobCanRetry":true},
+    {"code":"GLM_OCR_BAD_REQUEST","stage":"ocr-provider","provider":"zhipu","class":"permanent","taskErrorClass":"input_permanent","terminalStatus":"failed","publicMessageKey":"analysis-input-rejected","automaticRetrySameJob":false,"sameInputNewJobCanRetry":false},
+    {"code":"GLM_OCR_CLIENT_ERROR","stage":"ocr-provider","provider":"zhipu","class":"configuration","taskErrorClass":"configuration_permanent","terminalStatus":"failed","publicMessageKey":"provider-configuration-unavailable","automaticRetrySameJob":false,"sameInputNewJobCanRetry":false},
+    {"code":"GLM_OCR_AUTH_FAILED","stage":"ocr-provider","provider":"zhipu","class":"configuration","taskErrorClass":"configuration_permanent","terminalStatus":"failed","publicMessageKey":"provider-configuration-unavailable","automaticRetrySameJob":false,"sameInputNewJobCanRetry":false},
+    {"code":"GLM_OCR_FORBIDDEN","stage":"ocr-provider","provider":"zhipu","class":"configuration","taskErrorClass":"configuration_permanent","terminalStatus":"failed","publicMessageKey":"provider-configuration-unavailable","automaticRetrySameJob":false,"sameInputNewJobCanRetry":false},
+    {"code":"GLM_OCR_INPUT_TOO_LARGE","stage":"ocr-preflight","provider":"zhipu","class":"permanent","taskErrorClass":"input_permanent","terminalStatus":"failed","publicMessageKey":"analysis-input-rejected","automaticRetrySameJob":false,"sameInputNewJobCanRetry":false},
+    {"code":"GLM_OCR_RESPONSE_INVALID","stage":"ocr-normalize","provider":"zhipu","class":"evidence","taskErrorClass":"schema_permanent","terminalStatus":"failed","publicMessageKey":"provider-response-invalid","automaticRetrySameJob":false,"sameInputNewJobCanRetry":false},
+    {"code":"GLM_OCR_PAGE_COVERAGE_MISMATCH","stage":"ocr-normalize","provider":"zhipu","class":"evidence","taskErrorClass":"evidence_permanent","terminalStatus":"failed","publicMessageKey":"evidence-structure-unproven","automaticRetrySameJob":false,"sameInputNewJobCanRetry":false},
+    {"code":"OCR_RECORD_MEMBERSHIP_UNPROVEN","stage":"ocr-normalize","provider":"zhipu","class":"evidence","taskErrorClass":"evidence_permanent","terminalStatus":"failed","publicMessageKey":"evidence-structure-unproven","automaticRetrySameJob":false,"sameInputNewJobCanRetry":false},
+    {"code":"OCR_READING_ORDER_CONFLICT","stage":"ocr-normalize","provider":"zhipu","class":"evidence","taskErrorClass":"evidence_permanent","terminalStatus":"failed","publicMessageKey":"evidence-structure-unproven","automaticRetrySameJob":false,"sameInputNewJobCanRetry":false},
+    {"code":"OCR_STAGE_DEADLINE_EXCEEDED","stage":"ocr-provider","provider":"zhipu","class":"transient","taskErrorClass":"transport_transient","terminalStatus":"failed","publicMessageKey":"analysis-deadline-exceeded","automaticRetrySameJob":false,"sameInputNewJobCanRetry":true},
+    {"code":"DEEPSEEK_NOT_CONFIGURED","stage":"fact-extraction-config","provider":"deepseek","class":"configuration","taskErrorClass":"configuration_permanent","terminalStatus":"failed","publicMessageKey":"provider-configuration-unavailable","automaticRetrySameJob":false,"sameInputNewJobCanRetry":false},
+    {"code":"DEEPSEEK_NETWORK_ERROR","stage":"fact-extraction","provider":"deepseek","class":"transient","taskErrorClass":"transport_transient","terminalStatus":"failed","publicMessageKey":"provider-connection-interrupted","automaticRetrySameJob":true,"sameInputNewJobCanRetry":true},
+    {"code":"DEEPSEEK_TIMEOUT","stage":"fact-extraction","provider":"deepseek","class":"transient","taskErrorClass":"transport_transient","terminalStatus":"failed","publicMessageKey":"provider-timeout","automaticRetrySameJob":true,"sameInputNewJobCanRetry":true},
+    {"code":"DEEPSEEK_HTTP_408","stage":"fact-extraction","provider":"deepseek","class":"transient","taskErrorClass":"upstream_transient","terminalStatus":"failed","publicMessageKey":"provider-timeout","automaticRetrySameJob":false,"sameInputNewJobCanRetry":true},
+    {"code":"DEEPSEEK_HTTP_409","stage":"fact-extraction","provider":"deepseek","class":"transient","taskErrorClass":"upstream_transient","terminalStatus":"failed","publicMessageKey":"provider-temporarily-unavailable","automaticRetrySameJob":false,"sameInputNewJobCanRetry":true},
+    {"code":"DEEPSEEK_HTTP_425","stage":"fact-extraction","provider":"deepseek","class":"transient","taskErrorClass":"upstream_transient","terminalStatus":"failed","publicMessageKey":"provider-temporarily-unavailable","automaticRetrySameJob":false,"sameInputNewJobCanRetry":true},
+    {"code":"DEEPSEEK_RATE_LIMITED","stage":"fact-extraction","provider":"deepseek","class":"transient","taskErrorClass":"upstream_transient","terminalStatus":"failed","publicMessageKey":"provider-temporarily-unavailable","automaticRetrySameJob":true,"sameInputNewJobCanRetry":true},
+    {"code":"DEEPSEEK_PROVIDER_UNAVAILABLE","stage":"fact-extraction","provider":"deepseek","class":"transient","taskErrorClass":"upstream_transient","terminalStatus":"failed","publicMessageKey":"provider-temporarily-unavailable","automaticRetrySameJob":true,"sameInputNewJobCanRetry":true},
+    {"code":"DEEPSEEK_BAD_REQUEST","stage":"fact-extraction","provider":"deepseek","class":"configuration","taskErrorClass":"configuration_permanent","terminalStatus":"failed","publicMessageKey":"provider-configuration-unavailable","automaticRetrySameJob":false,"sameInputNewJobCanRetry":false},
+    {"code":"DEEPSEEK_CLIENT_ERROR","stage":"fact-extraction","provider":"deepseek","class":"configuration","taskErrorClass":"configuration_permanent","terminalStatus":"failed","publicMessageKey":"provider-configuration-unavailable","automaticRetrySameJob":false,"sameInputNewJobCanRetry":false},
+    {"code":"DEEPSEEK_AUTH_FAILED","stage":"fact-extraction","provider":"deepseek","class":"configuration","taskErrorClass":"configuration_permanent","terminalStatus":"failed","publicMessageKey":"provider-configuration-unavailable","automaticRetrySameJob":false,"sameInputNewJobCanRetry":false},
+    {"code":"DEEPSEEK_FORBIDDEN","stage":"fact-extraction","provider":"deepseek","class":"configuration","taskErrorClass":"configuration_permanent","terminalStatus":"failed","publicMessageKey":"provider-configuration-unavailable","automaticRetrySameJob":false,"sameInputNewJobCanRetry":false},
+    {"code":"DEEPSEEK_INPUT_TOO_LARGE","stage":"fact-extraction-preflight","provider":"deepseek","class":"permanent","taskErrorClass":"input_permanent","terminalStatus":"failed","publicMessageKey":"analysis-input-rejected","automaticRetrySameJob":false,"sameInputNewJobCanRetry":false},
+    {"code":"DEEPSEEK_CONTEXT_LIMIT","stage":"fact-extraction","provider":"deepseek","class":"permanent","taskErrorClass":"input_permanent","terminalStatus":"failed","publicMessageKey":"analysis-input-rejected","automaticRetrySameJob":false,"sameInputNewJobCanRetry":false},
+    {"code":"DEEPSEEK_RESPONSE_INVALID","stage":"fact-extraction","provider":"deepseek","class":"evidence","taskErrorClass":"schema_permanent","terminalStatus":"failed","publicMessageKey":"provider-response-invalid","automaticRetrySameJob":false,"sameInputNewJobCanRetry":false},
+    {"code":"DEEPSEEK_OUTPUT_TRUNCATED","stage":"fact-extraction","provider":"deepseek","class":"transient","taskErrorClass":"upstream_transient","terminalStatus":"failed","publicMessageKey":"provider-response-invalid","automaticRetrySameJob":false,"sameInputNewJobCanRetry":true},
+    {"code":"EVIDENCE_PUBLICATION_BLOCKED","stage":"publication-gate","provider":"none","class":"evidence","taskErrorClass":"evidence_permanent","terminalStatus":"failed","publicMessageKey":"analysis-publication-blocked","automaticRetrySameJob":false,"sameInputNewJobCanRetry":false}
+  ],
+  "publicFailureProtocol": {
+    "allowedTaskErrorClasses": [
+      "upstream_transient",
+      "transport_transient",
+      "evidence_permanent",
+      "schema_permanent",
+      "input_permanent",
+      "configuration_permanent",
+      "internal_permanent"
+    ],
+    "forbiddenFallbackTaskErrorClass": "unknown_permanent",
+    "terminalStatus": "failed",
+    "allowedPublicMessageKeys": [
+      "provider-configuration-unavailable",
+      "provider-connection-interrupted",
+      "provider-timeout",
+      "provider-temporarily-unavailable",
+      "analysis-input-rejected",
+      "provider-response-invalid",
+      "evidence-structure-unproven",
+      "analysis-deadline-exceeded",
+      "analysis-publication-blocked"
+    ],
+    "providerRawMessageAllowed": false
+  },
+  "cache": {
+    "rawProviderResponseCrossRequestCache": false,
+    "rawProviderResponseCrossRunCache": false,
+    "providerCandidateCrossRequestCache": false,
+    "providerCandidateCrossRunCache": false,
+    "requestLocalTransientObjectsAreCache": false,
+    "authoritativeEligibility": ["succeeded"],
+    "reviewOnlyEligibility": ["review_required"],
+    "failureEligibility": [],
+    "authoritativeAndReviewNamespaceShared": false,
+    "crossTenantReuseAllowed": false,
+    "crossVersionReuseAllowed": false,
+    "crossDocumentReuseAllowed": false
+  },
+  "secrets": {
+    "manager": "external-secret-manager",
+    "injection": "server-process-environment",
+    "frontend": {
+      "secretValueExposureAllowed": false,
+      "retrievableProviderCredentialConfigAllowed": false,
+      "identifierNameMentionAllowed": true
+    },
+    "healthExposure": "configured-boolean-only",
+    "providerFallbackCredentialsAllowed": false,
+    "variables": {
+      "zhipu": "ZHIPU_GLM_OCR_API_KEY",
+      "deepseek": "DEEPSEEK_API_KEY"
+    }
+  },
+  "outboundData": {
+    "zhipu": "rendered-page-image-containing-personal-sensitive-credit-information",
+    "deepseek": "normalized-credit-report-text-containing-personal-sensitive-credit-information",
+    "informedAuthorizationRequired": true,
+    "providerReviewRequiredBeforeEnablement": true,
+    "downstreamEndUserPolicyCoverageMayBeAssumed": false,
+    "publicImageUrlAllowed": false,
+    "providerPayloadLoggingAllowed": false
+  },
+  "rollback": {
+    "fallbackToLegacyOcrAllowed": false,
+    "phase0": "revert-document-and-contract-commit",
+    "futureGlmEnablement": "disable-scanned-analysis-capability-and-return-explicit-unavailable-error",
+    "reviewRequired": "disable-review-projection-without-changing-authoritative-results"
+  }
+}

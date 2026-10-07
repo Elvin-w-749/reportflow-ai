@@ -1,0 +1,3 @@
+const readline=require('readline');const only=process.argv[2]?new RegExp(process.argv[2],'i'):null,counts={};
+function safe(s){return String(s).replace(/\b(?:sk|ak)-[A-Za-z0-9_-]{8,}\b/gi,'<api-key>').replace(/https?:\/\/\S+/gi,'<url>').replace(/\b(?:\d{1,3}\.){3}\d{1,3}\b/g,'<ip>').replace(/\/[A-Za-z0-9_.@%+,:=\/-]+/g,'<path>').replace(/20\d{2}-\d{2}-\d{2}[^ ]*/g,'<datetime>').replace(/\b\d{3,}\b/g,'<n>').replace(/\s+/g,' ').trim().slice(0,260)}
+const rl=readline.createInterface({input:process.stdin,crlfDelay:Infinity});rl.on('line',l=>{if(!l||only&&!only.test(l))return;const k=safe(l);counts[k]=(counts[k]||0)+1});rl.on('close',()=>console.log(JSON.stringify(Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,30).map(([template,count])=>({template,count})),null,2)));

@@ -1,0 +1,36 @@
+{
+  "name": "rpt-web",
+  "private": true,
+  "version": "2026.7.17-legacy",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "build:legacy": "node scripts/build-legacy-web.mjs",
+    "verify:build": "node scripts/verify-legacy-web-build.mjs",
+    "package:legacy": "node scripts/package-legacy-web-release.mjs",
+    "check:routes": "node scripts/check-routes.mjs",
+    "test:unit": "node --test tests/*.test.mjs",
+    "test:runtime:v4": "pwsh -NoProfile -File tests/legacyAnalysisV4Runtime.tests.ps1",
+    "test": "npm run check:routes && npm run test:unit",
+    "verify": "npm run test && npm run build:legacy",
+    "verify:full": "npm run test && npm run test:runtime:v4 && npm run build:legacy",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "html2canvas": "^1.4.1",
+    "jspdf": "^4.2.1",
+    "naive-ui": "^2.44.1",
+    "vant": "^4.10.0",
+    "vue": "^3.5.38",
+    "vue-router": "^4.6.4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.7",
+    "postcss": "^8.5.23",
+    "vite": "^8.1.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

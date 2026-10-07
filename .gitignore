@@ -1,0 +1,76 @@
+# Dependencies, builds and caches
+**/node_modules/
+**/dist/
+**/dist-ssr/
+**/coverage/
+**/.tmp/
+**/tmp/
+**/.cache/
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+**/__pycache__/
+**/.venv/
+**/venv/
+**/env/
+
+# Secrets and local configuration
+**/.env
+**/.env.*
+!**/.env.example
+**/.npmrc
+!**/.npmrc.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.token.*
+*.private.*
+
+# Backend runtime and customer material
+/backend/data/
+/backend/data-local/
+/backend/data-test/
+/backend/uploads/
+/backend/logs/
+/backend/tmp/
+/backend/wheelhouse/
+/backend/models/
+/backend/ocr/models/
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+*.sqlite-*
+*.log
+*.jsonl
+*.pdf
+*.onnx
+*.ort
+*.whl
+
+# Release artifacts and local archives
+**/release-work/
+**/release-artifacts/
+**/audit/
+*.apk
+*.aab
+*.ipa
+*.tgz
+*.tar
+*.tar.gz
+*.gz
+*.zip
+*.bundle
+
+# Local operational outputs
+ops/log-audit/.output/
+
+# OS and editor files
+._*
+__MACOSX/
+.DS_Store
+Thumbs.db
+.vscode/

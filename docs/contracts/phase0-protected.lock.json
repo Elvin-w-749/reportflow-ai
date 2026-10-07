@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "algorithm": "sha256",
+  "normalization": "utf8; CRLF/CR converted to LF; leading BOM removed",
+  "generatedBy": "node scripts/verify-phase0-contracts.mjs --update-lock",
+  "description": "阶段 0 受保护路径的字节锚点。改任一受保护文件必须同时重跑 --update-lock 并复核 diff。",
+  "files": {
+    ".gitattributes": "6f2e2b7cd7dd69ff720e33e2f24ba4899666bf314913b611966867c9ebbcf6c1",
+    ".github/workflows/verify.yml": "d5ba20b745a195a1ee48537ca3ddca361a6c83e8dadffba8ab747a62fcbb7edf",
+    "backend/.env.example": "bf3f7f6232615aa202d18dda0ffbc945d5b65f2e7759821acaa13988bebebd65",
+    "backend/.gitattributes": "bafbd5a5677f3c3fd4d77249620f8c28ca6ee95a58ffef4a499d377d7f09fd48",
+    "docs/PRD.md": "f5a3e67203f8631b07ef5514af64a336a65021d826aabed24c1e410e3b9bee81",
+    "docs/architecture/ADR-0001-DUAL-MODEL-CREDIT-ANALYSIS.md": "ebcf0b5db5d715f29e264bfbeafd722a239fd7123bfab45f307b55a96a5e6a7e",
+    "docs/contracts/CREDIT_ANALYSIS_PHASE0_CONTRACT.md": "d44e585e7d41d20a11257ae187a9d8c0c599fab8c8a23bcb6be5673414e156f9",
+    "docs/contracts/OCR_STRUCTURED_V1.md": "19cd7e63e7abfc4d40acb4331140bbc43b68f1c9fdcabfe4a2a9cb5b796075c6",
+    "docs/contracts/credit-analysis-phase0.contract.json": "5d753da8d4aeeaf03b3e502e0b152ffb49d48ec2aa8fe380c55ae8e4c30c29c6",
+    "docs/contracts/credit-analysis-phase0.schema.json": "c774e905ec0ef44a6d9b53353ccb30118b5213863443188b5c1c69c31d0436dc",
+    "docs/contracts/ocr-structured-v1.schema.json": "5fb16930d7f33e29c9e5d59a224910732f1fb269e461f2c2e16c5396587c47ca",
+    "docs/product/PRD-DELTA-005-DUAL-MODEL-CREDIT-ANALYSIS.md": "92fb0e255462defbf1934ae0afe6f8eca9378e3684e00810a44624099e9a7383",
+    "docs/security/CREDIT_ANALYSIS_PROVIDER_SECURITY.md": "bf1414b6287a0657fffc4ee4a1cd9e37d63d7725f777776b6f5ad43982db14a1",
+    "frontend/.gitattributes": "393d5b3d99eadccd5e1f7eabb07e59d58555fba43c1b8898cad9b865f76116f9",
+    "package-lock.json": "fbcb0c80e2767ca8e77a1f4d0823396c46b2d47a268ab9d9cee6b8dddacfd560",
+    "package.json": "68d32827611606e7b8b94e27efdb6b8f433ca8cb772885a75345961420925710",
+    "scripts/phase0-contract-negative-fixtures.mjs": "0a68444b84448afd0e8cb70e84eb19eb84dd2c3e90971211920617fff6253cad",
+    "scripts/phase0-contract-validator.mjs": "3fb91d3b5e811ebbb188dc9ee342276d1d49d41f4b70546d266b39eebbf35653",
+    "scripts/secret-scan-policy.mjs": "8f044ae60b3ecfa910b366af7dd70bbbb7ddef0f028d5743206e8fa16e27bba7",
+    "scripts/verify-phase0-contracts.mjs": "f73e4693d4896f438346c0ffdd8efd1eb134a07bb57f9b86cc8000fb1f1fcabd",
+    "scripts/verify-repository.mjs": "2eb26b576f9ac0ea9252d7d367494d33b039016dc339af33aa7731c8ff6be4cd"
+  }
+}

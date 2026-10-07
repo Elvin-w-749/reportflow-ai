@@ -1,0 +1,55 @@
+/* ───────────────────────────────────────────────
+ * 响应式工具类库（断点约定见 global.css 末尾）
+ * 断点：768px 平板 / 1024px 桌面 / 1440px 宽桌面
+ * 纯 CSS 显隐与栅格工具，禁止依赖 JS resize 监听
+ * ─────────────────────────────────────────────── */
+
+/* ── 显隐工具 ──
+ * hide-mobile / show-desktop：<1024px 隐藏（仅桌面可见）
+ * hide-desktop：≥1024px 隐藏（仅移动/平板可见）
+ * 通过"在对应区间 display:none"实现，不改写元素原有 display 值 */
+@media (max-width: 1023.98px) {
+  .hide-mobile,
+  .show-desktop { display: none !important; }
+}
+
+@media (min-width: 1024px) {
+  .hide-desktop { display: none !important; }
+}
+
+/* 平板以下隐藏（仅 ≥768px 可见） */
+@media (max-width: 767.98px) {
+  .hide-phone { display: none !important; }
+}
+
+/* ── 自适应栅格 ──
+ * 卡片流：列宽下限由 --rpt-grid-min 控制（默认 320px），
+ * min(100%, ...) 保证窄屏不溢出，宽屏自动多列 */
+.rpt-grid-auto-fit {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--rpt-grid-min, 320px)), 1fr));
+  gap: var(--rpt-grid-gap, var(--rpt-space-4));
+}
+
+/* auto-fill 变体：列数不足时保留空轨道，卡片不被拉伸过宽 */
+.rpt-grid-auto-fill {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--rpt-grid-min, 320px)), 1fr));
+  gap: var(--rpt-grid-gap, var(--rpt-space-4));
+}
+
+/* ── 内容限宽 ── */
+.rpt-content-max {
+  width: 100%;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 阅读/表单类内容的窄限宽 */
+.rpt-content-narrow {
+  width: 100%;
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+}

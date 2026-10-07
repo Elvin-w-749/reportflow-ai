@@ -1,0 +1,1875 @@
+[
+  {
+    "id": "rf_bank_001",
+    "name": "臻享信用贷E01",
+    "institution": "示例银行A",
+    "institutionType": "示例国有大行",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_loan",
+    "rateText": "示例年化 6.0%（虚构演示值）",
+    "amountText": "示例额度 20 万（虚构演示值）",
+    "termText": "示例期限 24 期（虚构演示值）",
+    "tags": [
+      "虚构示例",
+      "非真实机构",
+      "示例利率"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_loan/e01",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "preferGoodHistory": true,
+      "preferLowDebt": true
+    }
+  },
+  {
+    "id": "rf_bank_002",
+    "name": "臻享信用贷E02",
+    "institution": "示例银行B",
+    "institutionType": "示例国有大行",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_loan",
+    "rateText": "示例年化 6.0%（虚构演示值）",
+    "amountText": "示例额度 20 万（虚构演示值）",
+    "termText": "示例期限 24 期（虚构演示值）",
+    "tags": [
+      "演示数据",
+      "非真实产品",
+      "示例期限"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_loan/e02",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "preferGoodHistory": true,
+      "preferLowDebt": true
+    }
+  },
+  {
+    "id": "rf_bank_003",
+    "name": "臻享信用贷E03",
+    "institution": "示例银行C",
+    "institutionType": "示例国有大行",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_loan",
+    "rateText": "示例年化 6.0%（虚构演示值）",
+    "amountText": "示例额度 20 万（虚构演示值）",
+    "termText": "示例期限 24 期（虚构演示值）",
+    "tags": [
+      "仅供技术演示",
+      "示例额度",
+      "演示排序"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_loan/e03",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "preferGoodHistory": true,
+      "preferLowDebt": true
+    }
+  },
+  {
+    "id": "rf_bank_004",
+    "name": "臻享信用贷E04",
+    "institution": "示例银行D",
+    "institutionType": "示例国有大行",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_loan",
+    "rateText": "示例年化 6.0%（虚构演示值）",
+    "amountText": "示例额度 20 万（虚构演示值）",
+    "termText": "示例期限 24 期（虚构演示值）",
+    "tags": [
+      "非真实机构",
+      "示例利率",
+      "占位标签"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_loan/e04",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "preferGoodHistory": true,
+      "preferLowDebt": true
+    }
+  },
+  {
+    "id": "rf_bank_005",
+    "name": "臻享信用贷E05",
+    "institution": "华东示例商业银行",
+    "institutionType": "示例股份制银行",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_loan",
+    "rateText": "示例年化 6.0%（虚构演示值）",
+    "amountText": "示例额度 20 万（虚构演示值）",
+    "termText": "示例期限 24 期（虚构演示值）",
+    "tags": [
+      "非真实产品",
+      "示例期限",
+      "虚构示例"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_loan/e05",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "preferGoodHistory": true,
+      "preferLowDebt": true
+    }
+  },
+  {
+    "id": "rf_bank_006",
+    "name": "臻享信用贷E06",
+    "institution": "华南示例商业银行",
+    "institutionType": "示例股份制银行",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_loan",
+    "rateText": "示例年化 6.0%（虚构演示值）",
+    "amountText": "示例额度 20 万（虚构演示值）",
+    "termText": "示例期限 24 期（虚构演示值）",
+    "tags": [
+      "示例额度",
+      "演示排序",
+      "演示数据"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_loan/e06",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "preferGoodHistory": true,
+      "preferLowDebt": true
+    }
+  },
+  {
+    "id": "rf_bank_007",
+    "name": "臻享信用贷E07",
+    "institution": "示例城乡合作银行",
+    "institutionType": "示例本地法人银行",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_loan",
+    "rateText": "示例年化 6.0%（虚构演示值）",
+    "amountText": "示例额度 20 万（虚构演示值）",
+    "termText": "示例期限 24 期（虚构演示值）",
+    "tags": [
+      "示例利率",
+      "占位标签",
+      "仅供技术演示"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_loan/e07",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "preferGoodHistory": true
+    }
+  },
+  {
+    "id": "rf_bank_008",
+    "name": "臻享信用贷E08",
+    "institution": "示例田野村镇银行",
+    "institutionType": "示例本地法人银行",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_loan",
+    "rateText": "示例年化 6.0%（虚构演示值）",
+    "amountText": "示例额度 20 万（虚构演示值）",
+    "termText": "示例期限 24 期（虚构演示值）",
+    "tags": [
+      "示例期限",
+      "虚构示例",
+      "非真实机构"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_loan/e08",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "preferGoodHistory": true
+    }
+  },
+  {
+    "id": "rf_bank_009",
+    "name": "臻享抵易贷M01",
+    "institution": "示例银行E",
+    "institutionType": "示例国有大行",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "mortgage",
+    "rateText": "示例年化 4.0%（虚构演示值）",
+    "amountText": "示例额度 100 万（虚构演示值）",
+    "termText": "示例期限 120 期（虚构演示值）",
+    "tags": [
+      "演示排序",
+      "演示数据",
+      "非真实产品"
+    ],
+    "sourceUrl": "https://example.com/demo/mortgage/m01",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "preferHighDebt": true
+    }
+  },
+  {
+    "id": "rf_bank_010",
+    "name": "臻享信用贷E09",
+    "institution": "示例湾畔城市银行",
+    "institutionType": "示例本地城商行",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_loan",
+    "rateText": "示例年化 6.0%（虚构演示值）",
+    "amountText": "示例额度 20 万（虚构演示值）",
+    "termText": "示例期限 24 期（虚构演示值）",
+    "tags": [
+      "占位标签",
+      "仅供技术演示",
+      "示例额度"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_loan/e09",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "preferGoodHistory": true,
+      "preferLowDebt": true
+    }
+  },
+  {
+    "id": "rf_bank_011",
+    "name": "臻享信用贷E10",
+    "institution": "华北示例商业银行",
+    "institutionType": "示例股份制银行",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_loan",
+    "rateText": "示例年化 6.0%（虚构演示值）",
+    "amountText": "示例额度 20 万（虚构演示值）",
+    "termText": "示例期限 24 期（虚构演示值）",
+    "tags": [
+      "虚构示例",
+      "非真实机构",
+      "示例利率"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_loan/e10",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "preferGoodHistory": true,
+      "preferLowDebt": true,
+      "preferIncomeEvidence": true
+    }
+  },
+  {
+    "id": "rf_cf_001",
+    "name": "臻享信用贷E11",
+    "institution": "示例惠想消费金融",
+    "institutionType": "示例持牌消费金融",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_loan",
+    "rateText": "示例年化 6.0%（虚构演示值）",
+    "amountText": "示例额度 20 万（虚构演示值）",
+    "termText": "示例期限 24 期（虚构演示值）",
+    "tags": [
+      "演示数据",
+      "非真实产品",
+      "示例期限"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_loan/e11",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12
+    }
+  },
+  {
+    "id": "rf_cf_002",
+    "name": "臻享信用贷E12",
+    "institution": "示例优想消费金融",
+    "institutionType": "示例持牌消费金融",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_loan",
+    "rateText": "示例年化 6.0%（虚构演示值）",
+    "amountText": "示例额度 20 万（虚构演示值）",
+    "termText": "示例期限 24 期（虚构演示值）",
+    "tags": [
+      "仅供技术演示",
+      "示例额度",
+      "演示排序"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_loan/e12",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12
+    }
+  },
+  {
+    "id": "rf_cf_003",
+    "name": "臻享信用贷E13",
+    "institution": "示例捷想消费金融",
+    "institutionType": "示例持牌消费金融",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_loan",
+    "rateText": "示例年化 6.0%（虚构演示值）",
+    "amountText": "示例额度 20 万（虚构演示值）",
+    "termText": "示例期限 24 期（虚构演示值）",
+    "tags": [
+      "非真实机构",
+      "示例利率",
+      "占位标签"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_loan/e13",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12
+    }
+  },
+  {
+    "id": "rf_cf_004",
+    "name": "臻享信用贷E14",
+    "institution": "示例诚想消费金融",
+    "institutionType": "示例持牌消费金融",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_loan",
+    "rateText": "示例年化 6.0%（虚构演示值）",
+    "amountText": "示例额度 20 万（虚构演示值）",
+    "termText": "示例期限 24 期（虚构演示值）",
+    "tags": [
+      "非真实产品",
+      "示例期限",
+      "虚构示例"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_loan/e14",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12
+    }
+  },
+  {
+    "id": "rf_bank_012",
+    "name": "臻享信用贷E15",
+    "institution": "西南示例商业银行",
+    "institutionType": "示例股份制银行",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_loan",
+    "rateText": "示例年化 6.0%（虚构演示值）",
+    "amountText": "示例额度 20 万（虚构演示值）",
+    "termText": "示例期限 24 期（虚构演示值）",
+    "tags": [
+      "示例额度",
+      "演示排序",
+      "演示数据"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_loan/e15",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "preferGoodHistory": true
+    }
+  },
+  {
+    "id": "rf_bank_013",
+    "name": "臻享信用贷E16",
+    "institution": "滨海示例商业银行",
+    "institutionType": "示例股份制银行",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_loan",
+    "rateText": "示例年化 6.0%（虚构演示值）",
+    "amountText": "示例额度 20 万（虚构演示值）",
+    "termText": "示例期限 24 期（虚构演示值）",
+    "tags": [
+      "示例利率",
+      "占位标签",
+      "仅供技术演示"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_loan/e16",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "preferGoodHistory": true,
+      "preferIncomeEvidence": true
+    }
+  },
+  {
+    "id": "rf_cf_005",
+    "name": "臻享信用贷E17",
+    "institution": "示例信想消费金融",
+    "institutionType": "示例持牌消费金融",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_loan",
+    "rateText": "示例年化 6.0%（虚构演示值）",
+    "amountText": "示例额度 20 万（虚构演示值）",
+    "termText": "示例期限 24 期（虚构演示值）",
+    "tags": [
+      "示例期限",
+      "虚构示例",
+      "非真实机构"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_loan/e17",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "preferIncomeEvidence": true
+    }
+  },
+  {
+    "id": "rf_cf_006",
+    "name": "家装消费贷E18",
+    "institution": "示例和想消费金融",
+    "institutionType": "示例持牌消费金融",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_loan",
+    "rateText": "示例年化 6.0%（虚构演示值）",
+    "amountText": "示例额度 20 万（虚构演示值）",
+    "termText": "示例期限 24 期（虚构演示值）",
+    "tags": [
+      "演示排序",
+      "演示数据",
+      "非真实产品"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_loan/e18",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "requireIncomeEvidence": true,
+      "preferAssetEvidence": true
+    }
+  },
+  {
+    "id": "rf_cf_007",
+    "name": "臻享信用贷E19",
+    "institution": "示例惠想消费金融",
+    "institutionType": "示例持牌消费金融",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_loan",
+    "rateText": "示例年化 6.0%（虚构演示值）",
+    "amountText": "示例额度 20 万（虚构演示值）",
+    "termText": "示例期限 24 期（虚构演示值）",
+    "tags": [
+      "占位标签",
+      "仅供技术演示",
+      "示例额度"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_loan/e19",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "preferIncomeEvidence": true
+    }
+  },
+  {
+    "id": "rf_cf_008",
+    "name": "臻享信用贷E20",
+    "institution": "示例优想消费金融",
+    "institutionType": "示例持牌消费金融",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_loan",
+    "rateText": "示例年化 6.0%（虚构演示值）",
+    "amountText": "示例额度 20 万（虚构演示值）",
+    "termText": "示例期限 24 期（虚构演示值）",
+    "tags": [
+      "虚构示例",
+      "非真实机构",
+      "示例利率"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_loan/e20",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "preferIncomeEvidence": true
+    }
+  },
+  {
+    "id": "rf_bank_014",
+    "name": "臻享信用贷E21",
+    "institution": "华东示例商业银行",
+    "parentInstitution": "华东示例商业银行",
+    "institutionType": "示例股份制银行",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_loan",
+    "rateText": "示例年化 6.0%（虚构演示值）",
+    "amountText": "示例额度 20 万（虚构演示值）",
+    "termText": "示例期限 24 期（虚构演示值）",
+    "eligibilityText": "虚构示例条目：仅用于演示资格说明的渲染，不代表任何真实审批条件。",
+    "requiredMaterials": [
+      "示例材料A",
+      "示例材料B",
+      "示例材料C",
+      "示例材料D"
+    ],
+    "tags": [
+      "演示数据",
+      "非真实产品",
+      "示例期限"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_loan/e21",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "preferGoodHistory": true,
+      "preferIncomeEvidence": true
+    }
+  },
+  {
+    "id": "rf_cf_009",
+    "name": "臻享信用贷E22",
+    "institution": "示例捷想消费金融",
+    "parentInstitution": "华东示例商业银行",
+    "institutionType": "示例持牌消费金融",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_loan",
+    "rateText": "示例年化 6.0%（虚构演示值）",
+    "amountText": "示例额度 20 万（虚构演示值）",
+    "termText": "示例期限 24 期（虚构演示值）",
+    "eligibilityText": "虚构示例条目：仅用于演示资格说明的渲染，不代表任何真实审批条件。",
+    "requiredMaterials": [
+      "示例材料A",
+      "示例材料B",
+      "示例材料C",
+      "示例材料D"
+    ],
+    "tags": [
+      "仅供技术演示",
+      "示例额度",
+      "演示排序"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_loan/e22",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "preferIncomeEvidence": true
+    }
+  },
+  {
+    "id": "rf_cf_010",
+    "name": "惠企经营贷B01",
+    "institution": "示例诚想消费金融",
+    "parentInstitution": "华东示例商业银行",
+    "institutionType": "示例持牌消费金融",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "merchant_loan",
+    "rateText": "示例年化 8.0%（虚构演示值）",
+    "amountText": "示例额度 50 万（虚构演示值）",
+    "termText": "示例期限 36 期（虚构演示值）",
+    "eligibilityText": "虚构示例条目：仅用于演示资格说明的渲染，不代表任何真实审批条件。",
+    "requiredMaterials": [
+      "示例材料A",
+      "示例材料G",
+      "示例材料H",
+      "示例材料B"
+    ],
+    "tags": [
+      "非真实机构",
+      "示例利率",
+      "占位标签"
+    ],
+    "sourceUrl": "https://example.com/demo/merchant_loan/b01",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "requireBusinessEvidence": true,
+      "preferIncomeEvidence": true
+    }
+  },
+  {
+    "id": "rf_card_001",
+    "name": "悦享信用卡C01",
+    "institution": "华南示例商业银行",
+    "parentInstitution": "华南示例商业银行",
+    "institutionType": "示例股份制银行",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_card",
+    "rateText": "示例分期费率 0.6%（虚构演示值）",
+    "amountText": "示例额度 5 万（虚构演示值）",
+    "termText": "示例期限 12 期（虚构演示值）",
+    "eligibilityText": "虚构示例条目：仅用于演示资格说明的渲染，不代表任何真实审批条件。",
+    "requiredMaterials": [
+      "示例材料A",
+      "示例材料D",
+      "示例材料I",
+      "示例材料C"
+    ],
+    "tags": [
+      "非真实产品",
+      "示例期限",
+      "虚构示例"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_card/c01",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "preferGoodHistory": true,
+      "preferIncomeEvidence": true
+    }
+  },
+  {
+    "id": "rf_card_002",
+    "name": "悦享信用卡C02",
+    "institution": "示例银行F",
+    "parentInstitution": "示例银行F",
+    "institutionType": "示例国有大行",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_card",
+    "rateText": "示例分期费率 0.6%（虚构演示值）",
+    "amountText": "示例额度 5 万（虚构演示值）",
+    "termText": "示例期限 12 期（虚构演示值）",
+    "eligibilityText": "虚构示例条目：仅用于演示资格说明的渲染，不代表任何真实审批条件。",
+    "requiredMaterials": [
+      "示例材料A",
+      "示例材料D",
+      "示例材料I",
+      "示例材料C"
+    ],
+    "tags": [
+      "示例额度",
+      "演示排序",
+      "演示数据"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_card/c02",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "preferGoodHistory": true
+    }
+  },
+  {
+    "id": "rf_cf_011",
+    "name": "臻享信用贷E23",
+    "institution": "示例信想消费金融",
+    "parentInstitution": "示例新城商业银行",
+    "institutionType": "示例持牌消费金融",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_loan",
+    "rateText": "示例年化 6.0%（虚构演示值）",
+    "amountText": "示例额度 20 万（虚构演示值）",
+    "termText": "示例期限 24 期（虚构演示值）",
+    "eligibilityText": "虚构示例条目：仅用于演示资格说明的渲染，不代表任何真实审批条件。",
+    "requiredMaterials": [
+      "示例材料A",
+      "示例材料B",
+      "示例材料C",
+      "示例材料D"
+    ],
+    "tags": [
+      "示例利率",
+      "占位标签",
+      "仅供技术演示"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_loan/e23",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "preferIncomeEvidence": true
+    }
+  },
+  {
+    "id": "rf_card_003",
+    "name": "悦享信用卡C03",
+    "institution": "示例银行G",
+    "parentInstitution": "示例银行G",
+    "institutionType": "示例国有大行",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_card",
+    "rateText": "示例分期费率 0.6%（虚构演示值）",
+    "amountText": "示例额度 5 万（虚构演示值）",
+    "termText": "示例期限 12 期（虚构演示值）",
+    "eligibilityText": "虚构示例条目：仅用于演示资格说明的渲染，不代表任何真实审批条件。",
+    "requiredMaterials": [
+      "示例材料A",
+      "示例材料D",
+      "示例材料I",
+      "示例材料C"
+    ],
+    "tags": [
+      "示例期限",
+      "虚构示例",
+      "非真实机构"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_card/c03",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "preferGoodHistory": true
+    }
+  },
+  {
+    "id": "rf_bank_015",
+    "name": "惠企经营贷B02",
+    "institution": "示例银行A",
+    "parentInstitution": "示例银行A",
+    "institutionType": "示例国有大行",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "merchant_loan",
+    "rateText": "示例年化 8.0%（虚构演示值）",
+    "amountText": "示例额度 50 万（虚构演示值）",
+    "termText": "示例期限 36 期（虚构演示值）",
+    "eligibilityText": "虚构示例条目：仅用于演示资格说明的渲染，不代表任何真实审批条件。",
+    "requiredMaterials": [
+      "示例材料A",
+      "示例材料G",
+      "示例材料H",
+      "示例材料B"
+    ],
+    "tags": [
+      "演示排序",
+      "演示数据",
+      "非真实产品"
+    ],
+    "sourceUrl": "https://example.com/demo/merchant_loan/b02",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "requireBusinessEvidence": true
+    }
+  },
+  {
+    "id": "rf_card_004",
+    "name": "悦享信用卡C04",
+    "institution": "华北示例商业银行",
+    "parentInstitution": "华北示例商业银行",
+    "institutionType": "示例股份制银行",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_card",
+    "rateText": "示例分期费率 0.6%（虚构演示值）",
+    "amountText": "示例额度 5 万（虚构演示值）",
+    "termText": "示例期限 12 期（虚构演示值）",
+    "eligibilityText": "虚构示例条目：仅用于演示资格说明的渲染，不代表任何真实审批条件。",
+    "requiredMaterials": [
+      "示例材料A",
+      "示例材料D",
+      "示例材料I",
+      "示例材料C"
+    ],
+    "tags": [
+      "占位标签",
+      "仅供技术演示",
+      "示例额度"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_card/c04",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "preferIncomeEvidence": true
+    }
+  },
+  {
+    "id": "rf_cf_012",
+    "name": "臻享信用贷E24",
+    "institution": "示例和想消费金融",
+    "parentInstitution": "示例新城商业银行",
+    "institutionType": "示例持牌消费金融",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_loan",
+    "rateText": "示例年化 6.0%（虚构演示值）",
+    "amountText": "示例额度 20 万（虚构演示值）",
+    "termText": "示例期限 24 期（虚构演示值）",
+    "eligibilityText": "虚构示例条目：仅用于演示资格说明的渲染，不代表任何真实审批条件。",
+    "requiredMaterials": [
+      "示例材料A",
+      "示例材料B",
+      "示例材料C",
+      "示例材料D"
+    ],
+    "tags": [
+      "虚构示例",
+      "非真实机构",
+      "示例利率"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_loan/e24",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "preferIncomeEvidence": true
+    }
+  },
+  {
+    "id": "rf_card_005",
+    "name": "悦享信用卡C05",
+    "institution": "示例银行B",
+    "parentInstitution": "示例银行B",
+    "institutionType": "示例国有大行",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_card",
+    "rateText": "示例分期费率 0.6%（虚构演示值）",
+    "amountText": "示例额度 5 万（虚构演示值）",
+    "termText": "示例期限 12 期（虚构演示值）",
+    "eligibilityText": "虚构示例条目：仅用于演示资格说明的渲染，不代表任何真实审批条件。",
+    "requiredMaterials": [
+      "示例材料A",
+      "示例材料D",
+      "示例材料I",
+      "示例材料C"
+    ],
+    "tags": [
+      "演示数据",
+      "非真实产品",
+      "示例期限"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_card/c05",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "preferGoodHistory": true
+    }
+  },
+  {
+    "id": "rf_card_006",
+    "name": "悦享信用卡C06",
+    "institution": "示例银行C",
+    "parentInstitution": "示例银行C",
+    "institutionType": "示例国有大行",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_card",
+    "rateText": "示例分期费率 0.6%（虚构演示值）",
+    "amountText": "示例额度 5 万（虚构演示值）",
+    "termText": "示例期限 12 期（虚构演示值）",
+    "eligibilityText": "虚构示例条目：仅用于演示资格说明的渲染，不代表任何真实审批条件。",
+    "requiredMaterials": [
+      "示例材料A",
+      "示例材料D",
+      "示例材料I",
+      "示例材料C"
+    ],
+    "tags": [
+      "仅供技术演示",
+      "示例额度",
+      "演示排序"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_card/c06",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12
+    }
+  },
+  {
+    "id": "rf_card_007",
+    "name": "悦享信用卡C07",
+    "institution": "西南示例商业银行",
+    "parentInstitution": "西南示例商业银行",
+    "institutionType": "示例股份制银行",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_card",
+    "rateText": "示例分期费率 0.6%（虚构演示值）",
+    "amountText": "示例额度 5 万（虚构演示值）",
+    "termText": "示例期限 12 期（虚构演示值）",
+    "eligibilityText": "虚构示例条目：仅用于演示资格说明的渲染，不代表任何真实审批条件。",
+    "requiredMaterials": [
+      "示例材料A",
+      "示例材料D",
+      "示例材料I",
+      "示例材料C"
+    ],
+    "tags": [
+      "非真实机构",
+      "示例利率",
+      "占位标签"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_card/c07",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "preferIncomeEvidence": true
+    }
+  },
+  {
+    "id": "rf_card_008",
+    "name": "悦享信用卡C08",
+    "institution": "滨海示例商业银行",
+    "parentInstitution": "滨海示例商业银行",
+    "institutionType": "示例股份制银行",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_card",
+    "rateText": "示例分期费率 0.6%（虚构演示值）",
+    "amountText": "示例额度 5 万（虚构演示值）",
+    "termText": "示例期限 12 期（虚构演示值）",
+    "eligibilityText": "虚构示例条目：仅用于演示资格说明的渲染，不代表任何真实审批条件。",
+    "requiredMaterials": [
+      "示例材料A",
+      "示例材料D",
+      "示例材料I",
+      "示例材料C"
+    ],
+    "tags": [
+      "非真实产品",
+      "示例期限",
+      "虚构示例"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_card/c08",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12
+    }
+  },
+  {
+    "id": "rf_card_009",
+    "name": "悦享信用卡C09",
+    "institution": "华东示例商业银行",
+    "parentInstitution": "华东示例商业银行",
+    "institutionType": "示例股份制银行",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_card",
+    "rateText": "示例分期费率 0.6%（虚构演示值）",
+    "amountText": "示例额度 5 万（虚构演示值）",
+    "termText": "示例期限 12 期（虚构演示值）",
+    "eligibilityText": "虚构示例条目：仅用于演示资格说明的渲染，不代表任何真实审批条件。",
+    "requiredMaterials": [
+      "示例材料A",
+      "示例材料D",
+      "示例材料I",
+      "示例材料C"
+    ],
+    "tags": [
+      "示例额度",
+      "演示排序",
+      "演示数据"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_card/c09",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12
+    }
+  },
+  {
+    "id": "rf_card_010",
+    "name": "悦享信用卡C10",
+    "institution": "示例湾畔城市银行",
+    "parentInstitution": "示例湾畔城市银行",
+    "institutionType": "示例本地城商行",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_card",
+    "rateText": "示例分期费率 0.6%（虚构演示值）",
+    "amountText": "示例额度 5 万（虚构演示值）",
+    "termText": "示例期限 12 期（虚构演示值）",
+    "eligibilityText": "虚构示例条目：仅用于演示资格说明的渲染，不代表任何真实审批条件。",
+    "requiredMaterials": [
+      "示例材料A",
+      "示例材料D",
+      "示例材料I",
+      "示例材料C"
+    ],
+    "tags": [
+      "示例利率",
+      "占位标签",
+      "仅供技术演示"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_card/c10",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12
+    }
+  },
+  {
+    "id": "rf_card_011",
+    "name": "悦享信用卡C11",
+    "institution": "示例城乡合作银行",
+    "parentInstitution": "示例城乡合作银行",
+    "institutionType": "示例本地法人银行",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_card",
+    "rateText": "示例分期费率 0.6%（虚构演示值）",
+    "amountText": "示例额度 5 万（虚构演示值）",
+    "termText": "示例期限 12 期（虚构演示值）",
+    "eligibilityText": "虚构示例条目：仅用于演示资格说明的渲染，不代表任何真实审批条件。",
+    "requiredMaterials": [
+      "示例材料A",
+      "示例材料D",
+      "示例材料I",
+      "示例材料C"
+    ],
+    "tags": [
+      "示例期限",
+      "虚构示例",
+      "非真实机构"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_card/c11",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12
+    }
+  },
+  {
+    "id": "rf_cf_013",
+    "name": "臻享信用贷E25",
+    "institution": "示例惠想消费金融",
+    "parentInstitution": "示例银行A",
+    "institutionType": "示例持牌消费金融",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_loan",
+    "rateText": "示例年化 6.0%（虚构演示值）",
+    "amountText": "示例额度 20 万（虚构演示值）",
+    "termText": "示例期限 24 期（虚构演示值）",
+    "eligibilityText": "虚构示例条目：仅用于演示资格说明的渲染，不代表任何真实审批条件。",
+    "requiredMaterials": [
+      "示例材料A",
+      "示例材料B",
+      "示例材料C",
+      "示例材料D"
+    ],
+    "tags": [
+      "演示排序",
+      "演示数据",
+      "非真实产品"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_loan/e25",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "preferIncomeEvidence": true
+    }
+  },
+  {
+    "id": "rf_cf_014",
+    "name": "臻享信用贷E26",
+    "institution": "示例优想消费金融",
+    "parentInstitution": "示例银行A",
+    "institutionType": "示例持牌消费金融",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_loan",
+    "rateText": "示例年化 6.0%（虚构演示值）",
+    "amountText": "示例额度 20 万（虚构演示值）",
+    "termText": "示例期限 24 期（虚构演示值）",
+    "eligibilityText": "虚构示例条目：仅用于演示资格说明的渲染，不代表任何真实审批条件。",
+    "requiredMaterials": [
+      "示例材料A",
+      "示例材料B",
+      "示例材料C",
+      "示例材料D"
+    ],
+    "tags": [
+      "占位标签",
+      "仅供技术演示",
+      "示例额度"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_loan/e26",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "preferIncomeEvidence": true
+    }
+  },
+  {
+    "id": "rf_cf_015",
+    "name": "臻享信用贷E27",
+    "institution": "示例捷想消费金融",
+    "parentInstitution": "华东示例商业银行",
+    "institutionType": "示例持牌消费金融",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_loan",
+    "rateText": "示例年化 6.0%（虚构演示值）",
+    "amountText": "示例额度 20 万（虚构演示值）",
+    "termText": "示例期限 24 期（虚构演示值）",
+    "eligibilityText": "虚构示例条目：仅用于演示资格说明的渲染，不代表任何真实审批条件。",
+    "requiredMaterials": [
+      "示例材料A",
+      "示例材料B",
+      "示例材料C",
+      "示例材料D"
+    ],
+    "tags": [
+      "虚构示例",
+      "非真实机构",
+      "示例利率"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_loan/e27",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "preferIncomeEvidence": true
+    }
+  },
+  {
+    "id": "rf_bank_s01_001",
+    "name": "臻享信用贷E28",
+    "institution": "示例银行D",
+    "parentInstitution": "示例银行D",
+    "institutionType": "示例国有大行",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_loan",
+    "rateText": "示例年化 6.0%（虚构演示值）",
+    "amountText": "示例额度 20 万（虚构演示值）",
+    "termText": "示例期限 24 期（虚构演示值）",
+    "eligibilityText": "虚构示例条目：仅用于演示资格说明的渲染，不代表任何真实审批条件。",
+    "requiredMaterials": [
+      "示例材料A",
+      "示例材料B",
+      "示例材料C",
+      "示例材料D"
+    ],
+    "tags": [
+      "演示数据",
+      "非真实产品",
+      "示例期限"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_loan/e28",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "preferGoodHistory": true,
+      "preferLowDebt": true,
+      "preferIncomeEvidence": true
+    }
+  },
+  {
+    "id": "rf_bank_s02_001",
+    "name": "家装消费贷E29",
+    "institution": "示例银行E",
+    "parentInstitution": "示例银行E",
+    "institutionType": "示例国有大行",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_loan",
+    "rateText": "示例年化 6.0%（虚构演示值）",
+    "amountText": "示例额度 20 万（虚构演示值）",
+    "termText": "示例期限 24 期（虚构演示值）",
+    "eligibilityText": "虚构示例条目：仅用于演示资格说明的渲染，不代表任何真实审批条件。",
+    "requiredMaterials": [
+      "示例材料A",
+      "示例材料B",
+      "示例材料C",
+      "示例材料D"
+    ],
+    "tags": [
+      "仅供技术演示",
+      "示例额度",
+      "演示排序"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_loan/e29",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "requireIncomeEvidence": true,
+      "preferAssetEvidence": true,
+      "preferGoodHistory": true
+    }
+  },
+  {
+    "id": "rf_bank_s03_001",
+    "name": "安居车抵贷M02",
+    "institution": "示例银行F",
+    "parentInstitution": "示例银行F",
+    "institutionType": "示例国有大行",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "mortgage",
+    "rateText": "示例年化 4.0%（虚构演示值）",
+    "amountText": "示例额度 100 万（虚构演示值）",
+    "termText": "示例期限 120 期（虚构演示值）",
+    "eligibilityText": "虚构示例条目：仅用于演示资格说明的渲染，不代表任何真实审批条件。",
+    "requiredMaterials": [
+      "示例材料A",
+      "示例材料E",
+      "示例材料F",
+      "示例材料C"
+    ],
+    "tags": [
+      "非真实机构",
+      "示例利率",
+      "占位标签"
+    ],
+    "sourceUrl": "https://example.com/demo/mortgage/m02",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "requireAssetEvidence": true,
+      "requireIncomeEvidence": true,
+      "preferHighDebt": true
+    }
+  },
+  {
+    "id": "rf_bank_s04_001",
+    "name": "安居车抵贷M03",
+    "institution": "示例银行A",
+    "parentInstitution": "示例银行A",
+    "institutionType": "示例国有大行",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "mortgage",
+    "rateText": "示例年化 4.0%（虚构演示值）",
+    "amountText": "示例额度 100 万（虚构演示值）",
+    "termText": "示例期限 120 期（虚构演示值）",
+    "eligibilityText": "虚构示例条目：仅用于演示资格说明的渲染，不代表任何真实审批条件。",
+    "requiredMaterials": [
+      "示例材料A",
+      "示例材料E",
+      "示例材料F",
+      "示例材料C"
+    ],
+    "tags": [
+      "非真实产品",
+      "示例期限",
+      "虚构示例"
+    ],
+    "sourceUrl": "https://example.com/demo/mortgage/m03",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "requireAssetEvidence": true,
+      "preferGoodHistory": true
+    }
+  },
+  {
+    "id": "rf_bank_s05_001",
+    "name": "安居车抵贷M04",
+    "institution": "示例银行B",
+    "parentInstitution": "示例银行B",
+    "institutionType": "示例国有大行",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "mortgage",
+    "rateText": "示例年化 4.0%（虚构演示值）",
+    "amountText": "示例额度 100 万（虚构演示值）",
+    "termText": "示例期限 120 期（虚构演示值）",
+    "eligibilityText": "虚构示例条目：仅用于演示资格说明的渲染，不代表任何真实审批条件。",
+    "requiredMaterials": [
+      "示例材料A",
+      "示例材料E",
+      "示例材料F",
+      "示例材料C"
+    ],
+    "tags": [
+      "示例额度",
+      "演示排序",
+      "演示数据"
+    ],
+    "sourceUrl": "https://example.com/demo/mortgage/m04",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "requireAssetEvidence": true,
+      "requireIncomeEvidence": true,
+      "preferGoodHistory": true
+    }
+  },
+  {
+    "id": "rf_card_s01_001",
+    "name": "悦享家装卡C12",
+    "institution": "示例银行C",
+    "parentInstitution": "示例银行C",
+    "institutionType": "示例国有大行",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_card",
+    "rateText": "示例分期费率 0.6%（虚构演示值）",
+    "amountText": "示例额度 5 万（虚构演示值）",
+    "termText": "示例期限 12 期（虚构演示值）",
+    "eligibilityText": "虚构示例条目：仅用于演示资格说明的渲染，不代表任何真实审批条件。",
+    "requiredMaterials": [
+      "示例材料A",
+      "示例材料D",
+      "示例材料I",
+      "示例材料C"
+    ],
+    "tags": [
+      "示例利率",
+      "占位标签",
+      "仅供技术演示"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_card/c12",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "requireIncomeEvidence": true,
+      "preferAssetEvidence": true
+    }
+  },
+  {
+    "id": "rf_card_s02_001",
+    "name": "悦享家装卡C13",
+    "institution": "示例银行D",
+    "parentInstitution": "示例银行D",
+    "institutionType": "示例国有大行",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_card",
+    "rateText": "示例分期费率 0.6%（虚构演示值）",
+    "amountText": "示例额度 5 万（虚构演示值）",
+    "termText": "示例期限 12 期（虚构演示值）",
+    "eligibilityText": "虚构示例条目：仅用于演示资格说明的渲染，不代表任何真实审批条件。",
+    "requiredMaterials": [
+      "示例材料A",
+      "示例材料D",
+      "示例材料I",
+      "示例材料C"
+    ],
+    "tags": [
+      "示例期限",
+      "虚构示例",
+      "非真实机构"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_card/c13",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "requireIncomeEvidence": true,
+      "requireAssetEvidence": true,
+      "preferGoodHistory": true
+    }
+  },
+  {
+    "id": "rf_bank_s06_001",
+    "name": "家装消费贷E30",
+    "institution": "示例新城商业银行",
+    "parentInstitution": "示例新城商业银行",
+    "institutionType": "示例城商行",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_loan",
+    "rateText": "示例年化 6.0%（虚构演示值）",
+    "amountText": "示例额度 20 万（虚构演示值）",
+    "termText": "示例期限 24 期（虚构演示值）",
+    "eligibilityText": "虚构示例条目：仅用于演示资格说明的渲染，不代表任何真实审批条件。",
+    "requiredMaterials": [
+      "示例材料A",
+      "示例材料B",
+      "示例材料C",
+      "示例材料D"
+    ],
+    "tags": [
+      "演示排序",
+      "演示数据",
+      "非真实产品"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_loan/e30",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "requireIncomeEvidence": true,
+      "preferGoodHistory": true
+    }
+  },
+  {
+    "id": "rf_bank_s07_001",
+    "name": "家装消费贷E31",
+    "institution": "示例北岸商业银行",
+    "parentInstitution": "示例北岸商业银行",
+    "institutionType": "示例城商行",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_loan",
+    "rateText": "示例年化 6.0%（虚构演示值）",
+    "amountText": "示例额度 20 万（虚构演示值）",
+    "termText": "示例期限 24 期（虚构演示值）",
+    "eligibilityText": "虚构示例条目：仅用于演示资格说明的渲染，不代表任何真实审批条件。",
+    "requiredMaterials": [
+      "示例材料A",
+      "示例材料B",
+      "示例材料C",
+      "示例材料D"
+    ],
+    "tags": [
+      "占位标签",
+      "仅供技术演示",
+      "示例额度"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_loan/e31",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "requireIncomeEvidence": true,
+      "preferGoodHistory": true
+    }
+  },
+  {
+    "id": "rf_bank_s08_001",
+    "name": "家装消费贷E32",
+    "institution": "示例新城商业银行",
+    "parentInstitution": "示例新城商业银行",
+    "institutionType": "示例城商行",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_loan",
+    "rateText": "示例年化 6.0%（虚构演示值）",
+    "amountText": "示例额度 20 万（虚构演示值）",
+    "termText": "示例期限 24 期（虚构演示值）",
+    "eligibilityText": "虚构示例条目：仅用于演示资格说明的渲染，不代表任何真实审批条件。",
+    "requiredMaterials": [
+      "示例材料A",
+      "示例材料B",
+      "示例材料C",
+      "示例材料D"
+    ],
+    "tags": [
+      "虚构示例",
+      "非真实机构",
+      "示例利率"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_loan/e32",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "requireIncomeEvidence": true,
+      "preferGoodHistory": true
+    }
+  },
+  {
+    "id": "rf_bank_s09_001",
+    "name": "安居车抵贷M05",
+    "institution": "示例新城商业银行",
+    "parentInstitution": "示例新城商业银行",
+    "institutionType": "示例城商行",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "mortgage",
+    "rateText": "示例年化 4.0%（虚构演示值）",
+    "amountText": "示例额度 100 万（虚构演示值）",
+    "termText": "示例期限 120 期（虚构演示值）",
+    "eligibilityText": "虚构示例条目：仅用于演示资格说明的渲染，不代表任何真实审批条件。",
+    "requiredMaterials": [
+      "示例材料A",
+      "示例材料E",
+      "示例材料F",
+      "示例材料C"
+    ],
+    "tags": [
+      "演示数据",
+      "非真实产品",
+      "示例期限"
+    ],
+    "sourceUrl": "https://example.com/demo/mortgage/m05",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "requireAssetEvidence": true,
+      "requireIncomeEvidence": true,
+      "preferHighDebt": true
+    }
+  },
+  {
+    "id": "rf_cf_s01_001",
+    "name": "臻享信用贷E33",
+    "institution": "示例诚想消费金融",
+    "parentInstitution": "华东示例商业银行",
+    "institutionType": "示例持牌消费金融",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_loan",
+    "rateText": "示例年化 6.0%（虚构演示值）",
+    "amountText": "示例额度 20 万（虚构演示值）",
+    "termText": "示例期限 24 期（虚构演示值）",
+    "eligibilityText": "虚构示例条目：仅用于演示资格说明的渲染，不代表任何真实审批条件。",
+    "requiredMaterials": [
+      "示例材料A",
+      "示例材料B",
+      "示例材料C",
+      "示例材料D"
+    ],
+    "tags": [
+      "仅供技术演示",
+      "示例额度",
+      "演示排序"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_loan/e33",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "preferIncomeEvidence": true
+    }
+  },
+  {
+    "id": "rf_cf_s02_001",
+    "name": "家装消费贷E34",
+    "institution": "示例信想消费金融",
+    "parentInstitution": "示例新城商业银行",
+    "institutionType": "示例持牌消费金融",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_loan",
+    "rateText": "示例年化 6.0%（虚构演示值）",
+    "amountText": "示例额度 20 万（虚构演示值）",
+    "termText": "示例期限 24 期（虚构演示值）",
+    "eligibilityText": "虚构示例条目：仅用于演示资格说明的渲染，不代表任何真实审批条件。",
+    "requiredMaterials": [
+      "示例材料A",
+      "示例材料B",
+      "示例材料C",
+      "示例材料D"
+    ],
+    "tags": [
+      "非真实机构",
+      "示例利率",
+      "占位标签"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_loan/e34",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "requireIncomeEvidence": true,
+      "preferAssetEvidence": true
+    }
+  },
+  {
+    "id": "rf_cf_s03_001",
+    "name": "臻享信用贷E35",
+    "institution": "示例和想消费金融",
+    "parentInstitution": "示例新城商业银行",
+    "institutionType": "示例持牌消费金融",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "credit_loan",
+    "rateText": "示例年化 6.0%（虚构演示值）",
+    "amountText": "示例额度 20 万（虚构演示值）",
+    "termText": "示例期限 24 期（虚构演示值）",
+    "eligibilityText": "虚构示例条目：仅用于演示资格说明的渲染，不代表任何真实审批条件。",
+    "requiredMaterials": [
+      "示例材料A",
+      "示例材料B",
+      "示例材料C",
+      "示例材料D"
+    ],
+    "tags": [
+      "非真实产品",
+      "示例期限",
+      "虚构示例"
+    ],
+    "sourceUrl": "https://example.com/demo/credit_loan/e35",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "preferIncomeEvidence": true
+    }
+  },
+  {
+    "id": "rf_bank_s10_001",
+    "name": "安居车抵贷M06",
+    "institution": "华南示例商业银行",
+    "parentInstitution": "华南示例商业银行",
+    "institutionType": "示例股份制银行",
+    "serviceArea": "示例地区（演示数据）",
+    "category": "mortgage",
+    "rateText": "示例年化 4.0%（虚构演示值）",
+    "amountText": "示例额度 100 万（虚构演示值）",
+    "termText": "示例期限 120 期（虚构演示值）",
+    "eligibilityText": "虚构示例条目：仅用于演示资格说明的渲染，不代表任何真实审批条件。",
+    "requiredMaterials": [
+      "示例材料A",
+      "示例材料E",
+      "示例材料F",
+      "示例材料C"
+    ],
+    "tags": [
+      "示例额度",
+      "演示排序",
+      "演示数据"
+    ],
+    "sourceUrl": "https://example.com/demo/mortgage/m06",
+    "sourceNote": "虚构示例数据：本条不对应任何真实机构、真实产品或官方页面，sourceUrl 为占位链接。",
+    "rules": {
+      "allowLianSan": false,
+      "allowOverdue": false,
+      "minScore": 60,
+      "maxDebtRatio": 0.7,
+      "maxQueryCount": 10,
+      "maxNonBankRatio": 0.5,
+      "maxInstitutions": 12,
+      "requireAssetEvidence": true,
+      "requireIncomeEvidence": true,
+      "preferHighDebt": true
+    }
+  }
+]

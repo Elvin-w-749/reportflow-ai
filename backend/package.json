@@ -1,0 +1,33 @@
+{
+  "name": "rpt-api-proxy",
+  "version": "1.0.0",
+  "private": true,
+  "description": "分析报告工作台 API：PDF 文本抽取与信用分析代理，与客户端 PROXY_BASE 对齐",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "verify:rapidocr-models": "node scripts/verifyRapidOcrModels.js",
+    "test": "node --test --test-reporter=spec tests/*.test.js",
+    "test:legacy-api": "node --test --test-reporter=spec tests/localOcr.test.js tests/ownershipEvidence.test.js tests/rapidOcrIdentity.test.js tests/scannedPdfOwnershipFlow.test.js tests/legacyServiceIdentity.test.js tests/safeOwnershipEvidence.test.js"
+  },
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^12.11.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.4.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^2.2.0",
+    "mupdf": "^1.27.0",
+    "pdf-parse": "^1.1.1",
+    "pino": "^9.5.0",
+    "sharp": "0.35.3"
+  },
+  "devDependencies": {
+    "ajv": "8.20.0"
+  }
+}

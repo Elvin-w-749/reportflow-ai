@@ -1,0 +1,434 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:reportflow:credit-analysis:ocr-structured-v1",
+  "title": "OCR Structured Evidence Context v1",
+  "description": "智谱 GLM-OCR 单页布局候选经确定性清洗后的内部证据契约；结构有效不等于事实已接受。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "sourceMode",
+    "provider",
+    "model",
+    "complete",
+    "expectedPageCount",
+    "metadata",
+    "pages"
+  ],
+  "properties": {
+    "version": {
+      "const": "ocr-structured-v1"
+    },
+    "sourceMode": {
+      "const": "ocr-structured"
+    },
+    "provider": {
+      "const": "zhipu-layout-parsing"
+    },
+    "model": {
+      "const": "glm-ocr"
+    },
+    "complete": {
+      "type": "boolean"
+    },
+    "expectedPageCount": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 100
+    },
+    "metadata": {
+      "$ref": "#/$defs/metadata"
+    },
+    "pages": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 100,
+      "items": {
+        "$ref": "#/$defs/page"
+      }
+    }
+  },
+  "$defs": {
+    "coordinate": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 20000
+    },
+    "pageExtent": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 20000
+    },
+    "bounds": {
+      "type": "array",
+      "prefixItems": [
+        { "$ref": "#/$defs/coordinate" },
+        { "$ref": "#/$defs/coordinate" },
+        { "$ref": "#/$defs/pageExtent" },
+        { "$ref": "#/$defs/pageExtent" }
+      ],
+      "items": false,
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "pageBounds": {
+      "type": "array",
+      "prefixItems": [
+        { "const": 0 },
+        { "const": 0 },
+        { "$ref": "#/$defs/pageExtent" },
+        { "$ref": "#/$defs/pageExtent" }
+      ],
+      "items": false,
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "safeText": {
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 1000000,
+      "pattern": "^(?![\\s\\S]*<\\s*\\/?\\s*[A-Za-z][^>]*>)(?![\\s\\S]*\\b[oO][nN][A-Za-z0-9_-]*\\s*=)(?![\\s\\S]*\\b(?:[hH][rR][eE][fF]|[sS][rR][cC]|[xX][lL][iI][nN][kK]:[hH][rR][eE][fF])\\s*=)(?![\\s\\S]*\\b[uU][rR][lL]\\s*\\()[^\\u0000]*$"
+    },
+    "safeBlockText": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200000,
+      "pattern": "^(?![\\s\\S]*<\\s*\\/?\\s*[A-Za-z][^>]*>)(?![\\s\\S]*\\b[oO][nN][A-Za-z0-9_-]*\\s*=)(?![\\s\\S]*\\b(?:[hH][rR][eE][fF]|[sS][rR][cC]|[xX][lL][iI][nN][kK]:[hH][rR][eE][fF])\\s*=)(?![\\s\\S]*\\b[uU][rR][lL]\\s*\\()[^\\u0000]*$"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "adapterVersion",
+        "readingOrderVersion",
+        "tableParserVersion",
+        "canonicalizationVersion",
+        "normalizationLimitsVersion",
+        "providerBboxNormalizationVersion",
+        "blankPagePolicyVersion",
+        "coordinateSpace",
+        "render"
+      ],
+      "properties": {
+        "adapterVersion": {
+          "type": "string",
+          "pattern": "^glm-layout-adapter-v[1-9][0-9]*$",
+          "maxLength": 64
+        },
+        "readingOrderVersion": {
+          "type": "string",
+          "pattern": "^ocr-reading-order-v[1-9][0-9]*$",
+          "maxLength": 64
+        },
+        "tableParserVersion": {
+          "type": "string",
+          "pattern": "^ocr-table-parser-v[1-9][0-9]*$",
+          "maxLength": 64
+        },
+        "canonicalizationVersion": {
+          "const": "credit-ocr-canonical-json-v1"
+        },
+        "normalizationLimitsVersion": {
+          "const": "ocr-normalization-limits-v1"
+        },
+        "providerBboxNormalizationVersion": {
+          "const": "glm-normalized-region-bbox-to-rendered-pixels-v1"
+        },
+        "blankPagePolicyVersion": {
+          "const": "verified-blank-page-v1"
+        },
+        "coordinateSpace": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name", "origin", "xAxis", "yAxis", "boundsOrder", "precisionDecimals"],
+          "properties": {
+            "name": { "const": "rendered-image-pixels" },
+            "origin": { "const": "top-left" },
+            "xAxis": { "const": "right" },
+            "yAxis": { "const": "down" },
+            "boundsOrder": { "const": "x0-y0-x1-y1" },
+            "precisionDecimals": { "const": 3 }
+          }
+        },
+        "render": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["engine", "dpi", "format", "quality"],
+          "properties": {
+            "engine": {
+              "enum": ["mupdf", "sharp"]
+            },
+            "dpi": {
+              "const": 200
+            },
+            "format": {
+              "const": "jpeg"
+            },
+            "quality": {
+              "const": 92
+            }
+          }
+        }
+      }
+    },
+    "page": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pageNumber", "bounds", "verifiedBlank", "text", "blocks"],
+      "properties": {
+        "pageNumber": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        },
+        "bounds": {
+          "$ref": "#/$defs/pageBounds"
+        },
+        "verifiedBlank": {
+          "type": "boolean"
+        },
+        "text": {
+          "$ref": "#/$defs/safeText"
+        },
+        "blocks": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 5000,
+          "items": {
+            "$ref": "#/$defs/block"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "verifiedBlank": { "const": true } },
+            "required": ["verifiedBlank"]
+          },
+          "then": {
+            "properties": {
+              "text": { "type": "string", "const": "" },
+              "blocks": { "type": "array", "maxItems": 0 }
+            }
+          },
+          "else": {
+            "properties": {
+              "text": { "type": "string", "minLength": 1 },
+              "blocks": { "type": "array", "minItems": 1 }
+            }
+          }
+        }
+      ]
+    },
+    "tableCell": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "text",
+        "charStart",
+        "charEnd",
+        "cellOrdinal",
+        "cellCount",
+        "columnRole"
+      ],
+      "properties": {
+        "text": {
+          "$ref": "#/$defs/safeBlockText"
+        },
+        "charStart": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000
+        },
+        "charEnd": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000
+        },
+        "cellOrdinal": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 256
+        },
+        "cellCount": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 256
+        },
+        "columnRole": {
+          "enum": [
+            "sequence",
+            "date",
+            "institution",
+            "account_identity",
+            "currency",
+            "amount",
+            "status",
+            "query_reason",
+            "other"
+          ]
+        }
+      }
+    },
+    "logicalTable": {
+      "type": "object",
+      "$comment": "Only deterministically proven logical rows/cells may instantiate this object. A coarse multi-record region that cannot be split MUST fail with OCR_RECORD_MEMBERSHIP_UNPROVEN and MUST NOT emit a block.",
+      "additionalProperties": false,
+      "required": [
+        "tableOrdinal",
+        "rowOrdinal",
+        "rowCount",
+        "cells"
+      ],
+      "properties": {
+        "tableOrdinal": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "rowOrdinal": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "rowCount": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "cells": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 256,
+          "items": {
+            "$ref": "#/$defs/tableCell"
+          }
+        }
+      }
+    },
+    "block": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "text",
+        "charStart",
+        "charEnd",
+        "bbox",
+        "sourceBlockOrdinal",
+        "sourceLineOrdinal",
+        "sourceLineCount",
+        "regionIndex",
+        "regionLabel",
+        "geometryGranularity",
+        "recordMembership",
+        "logicalTable"
+      ],
+      "properties": {
+        "text": {
+          "$ref": "#/$defs/safeBlockText"
+        },
+        "charStart": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000
+        },
+        "charEnd": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000
+        },
+        "bbox": {
+          "$ref": "#/$defs/bounds"
+        },
+        "sourceBlockOrdinal": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "sourceLineOrdinal": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "sourceLineCount": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "regionIndex": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "regionLabel": {
+          "enum": [
+            "title",
+            "paragraph",
+            "list_item",
+            "table_row",
+            "header",
+            "footer",
+            "caption",
+            "formula",
+            "figure_text"
+          ]
+        },
+        "geometryGranularity": {
+          "const": "region"
+        },
+        "recordMembership": {
+          "enum": [
+            "single-record",
+            "logical-table-row",
+            "non-record"
+          ]
+        },
+        "logicalTable": {
+          "oneOf": [
+            { "type": "null" },
+            { "$ref": "#/$defs/logicalTable" }
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "regionLabel": { "const": "table_row" }
+            },
+            "required": ["regionLabel"]
+          },
+          "then": {
+            "properties": {
+              "recordMembership": { "const": "logical-table-row" },
+              "logicalTable": { "$ref": "#/$defs/logicalTable" }
+            }
+          },
+          "else": {
+            "properties": {
+              "recordMembership": {
+                "enum": ["single-record", "non-record"]
+              },
+              "logicalTable": { "type": "null" }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "regionLabel": {
+                "enum": ["title", "header", "footer", "caption", "formula", "figure_text"]
+              }
+            },
+            "required": ["regionLabel"]
+          },
+          "then": {
+            "properties": {
+              "recordMembership": { "const": "non-record" }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

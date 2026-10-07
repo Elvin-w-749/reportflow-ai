@@ -1,0 +1,15 @@
+const readline=require('readline');
+const counts={ufw_or_firewall:0,generic_firewall:0,apparmor:0,oom:0,segfault:0,disk_or_fs:0,network_kernel:0,other:0};
+let total=0;
+const rl=readline.createInterface({input:process.stdin,crlfDelay:Infinity});
+rl.on('line',line=>{if(!line)return;let o;try{o=JSON.parse(line)}catch{return}total++;const s=String(o.MESSAGE||'');
+  if(/UFW (BLOCK|AUDIT|ALLOW|LIMIT)/.test(s))counts.ufw_or_firewall++;
+  else if(/IN=.*OUT=.*(?:SRC|DST)=/.test(s))counts.generic_firewall++;
+  else if(/apparmor=/.test(s))counts.apparmor++;
+  else if(/out of memory|oom-killer|Killed process/i.test(s))counts.oom++;
+  else if(/segfault|general protection fault/i.test(s))counts.segfault++;
+  else if(/I\/O error|EXT4-fs error|No space left|read-only file system/i.test(s))counts.disk_or_fs++;
+  else if(/SYN flooding|nf_conntrack|martian source|TCP:/i.test(s))counts.network_kernel++;
+  else counts.other++;
+});
+rl.on('close',()=>console.log(JSON.stringify({total,categories:counts},null,2)));

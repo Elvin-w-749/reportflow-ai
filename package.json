@@ -1,0 +1,28 @@
+{
+  "name": "reportflow-ai",
+  "version": "1.0.0",
+  "private": true,
+  "description": "分析报告工作台：Vue 3 Web 前端与 Node.js API 后端的单仓库工程",
+  "scripts": {
+    "install:frontend": "npm --prefix frontend ci",
+    "install:backend": "npm --prefix backend ci",
+    "install:all": "npm run install:frontend && npm run install:backend",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev:backend": "npm --prefix backend run start",
+    "test:frontend": "npm --prefix frontend test",
+    "test:backend:deterministic": "node --test --test-reporter=spec tests/matchCoreCrossLayerParity.test.js backend/tests/analysisCoordinator.test.js backend/tests/analysisTaskService.test.js backend/tests/analysisSupportMigration.test.js backend/tests/analysisSupportRoute.test.js backend/tests/trustedAnalysisEvent.test.js backend/tests/releaseIdentity.test.js backend/tests/deterministicCreditAnalysis.test.js backend/tests/modelDeterminismContract.test.js backend/tests/serverDeterminismContract.test.js backend/tests/deploymentSecurityBlockers.test.js backend/tests/cardOutstandingSeparation.test.js backend/tests/creditCardUtilizationEvidence.test.js backend/tests/creditRuleEngineDebtRatioPolicy.test.js backend/tests/evidenceFirstCreditAnalysis.test.js backend/tests/evidenceSafeDiagnostic.test.js backend/tests/fixedTestAccountProductionGate.test.js backend/tests/institutionIsolationFailClosed.test.js backend/tests/matchCoreDecisionEligibility.test.js backend/tests/matchRouteAuthorization.test.js backend/tests/queryScoringSemantics.test.js backend/tests/queryWindowPolicyClassification.test.js backend/tests/realReportGoldenAnonymous.test.js backend/tests/reportApiSummaryIdempotency.test.js backend/tests/sourceSharedCreditIntegration.test.js backend/tests/teacherDetailAuthorization.test.js",
+    "test:backend:legacy": "npm --prefix backend run test:legacy-api",
+    "test:backend:full": "npm --prefix backend test",
+    "build:frontend": "npm --prefix frontend run build:legacy",
+    "verify:repository": "node scripts/verify-repository.mjs",
+    "verify:phase0-contracts": "node scripts/verify-phase0-contracts.mjs",
+    "test": "npm run verify:repository && npm run verify:phase0-contracts && npm run test:frontend && npm run test:backend:deterministic && npm run test:backend:legacy",
+    "verify": "npm test && npm run build:frontend"
+  },
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "devDependencies": {
+    "ajv": "8.20.0"
+  }
+}
